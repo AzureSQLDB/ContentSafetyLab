@@ -70,6 +70,8 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
 1. Back on the **Create a SQL Database** page, verify the values you entered and that the free database offer has been applied. 
 
+    ![A picture of verifying the values and that the free database offer has been applied](./media/ch2/deploy1o.png)
+
 1. **ADD ADVENTURE WORKS DATA HERE**
 
 1. Then click the **Review + create** button in the lower left of the page.
