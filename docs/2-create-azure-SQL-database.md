@@ -72,11 +72,29 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of verifying the values and that the free database offer has been applied](./media/ch2/deploy1o.png)
 
-1. **ADD ADVENTURE WORKS DATA HERE**
+1. On the top of the page, click on the **Additional settings** tab.
 
-1. Then click the **Review + create** button in the lower left of the page.
+    ![A picture of clicking on the Additional settings tab](./media/ch2/deploy11a.png)
 
-    ![A picture of verifying the values and that the free database offer has been applied and clicking the Review + create button in the lower left of the page](./media/ch2/deploy1o.png)
+1. On the Additional settings page, find the **Data source** section on the top.
+
+    ![A picture of the Data source section on the Additional settings page](./media/ch2/deploy11b.png)
+
+1. Use the **Use existing data** toggle
+
+    ![A picture of the Use existing data toggle](./media/ch2/deploy11c.png)
+
+    to set it to **sample** by clicking on it.
+
+    ![A picture of clicking on the sample option of the Use existing data toggle](./media/ch2/deploy11d.png)
+
+    and in the pop-up doalog, select **OK** for the question **"Do you want to continue"**.
+
+    ![A picture of selecting OK for the question Do you want to continue in the pop-up doalog](./media/ch2/deploy11e.png)
+
+1. On the bottom of the page in the lower left, click the **Review + create** blue button.
+
+    ![A picture of clicking the Review + create blue button](./media/ch2/deploy11f.png)
 
 1. On the following page, click the **Create** button in the lower left.
 
