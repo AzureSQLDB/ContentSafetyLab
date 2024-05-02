@@ -50,7 +50,7 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of entering a server name and choosing a Location using the dropdown menu on the Create SQL Database Server page](./media/ch2/deploy1j.png)
 
-1. Now, in the **Authentication** section, select the **radio button** for **Use both SQL and Microsoft Entra authentication**.
+1. Now, in the **Authentication** section, select the **radio button** for **Use Microsoft Entra-only authentication**.
 
     ![A picture of selecting the radio button for Use both SQL and Microsoft Entra authentication in the authentication section](./media/ch2/deploy1k.png)
 
@@ -62,11 +62,9 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of select your account as the Entra ID admin](./media/ch2/deploy1m.png)
 
-1. Set the **Server admin login** as sqladmin and then enter a strong password for the password fields.
-
-    ![A picture of setting the Server admin login as sqladmin and then entering a strong password for the password fields](./media/ch2/deploy1n.png)
-
 1. Click the **OK** button on the bottom left of the page.
+
+    ![A picture of clicking the OK button at the bottom of the authentication page](./media/ch2/deploy1m1.png)
 
 1. Back on the **Create a SQL Database** page, verify the values you entered and that the free database offer has been applied. 
 
@@ -84,7 +82,7 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of the Use existing data toggle](./media/ch2/deploy11c.png)
 
-    to set it to **sample** by clicking on it.
+    to set it to **Sample** by clicking on it.
 
     ![A picture of clicking on the sample option of the Use existing data toggle](./media/ch2/deploy11d.png)
 
@@ -134,128 +132,24 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of clicking the save button in the lower left of the page](./media/ch2/deploy1x.png)
 
-### Create a connection profile to the free Azure SQL Database
+### Connect to the free Azure SQL Database in the Azure Portal
 
-1. Using the extensions panel, select the **SQL Server connections extension**
+1. Using the menu on the left side, open the menu items under **Settings** if not alreay opened. Then select **SQL Databases** by clicking on it.
 
-    ![A picture of selecting the SQL Server connection extension in code spaces](./media/ch2/deploy1.png)
+    ![A picture of clicking the SQL Databases option under settings](./media/ch2/deploy2a.png)
 
-    and create a new connection by clicking the plus sign on the upper right in the extension.
+1. Next, on the main page, find the FreeDB you created and click on it naviage to the database details page.
 
-    ![A picture of creating a new connection by clicking the plus sign on the upper right in the extension](./media/ch2/deploy2.png)
+    ![A picture of clicking the FreeDB SQL Databases](./media/ch2/deploy2b.png)
 
-1. Use the following values for the Create Connection dialog boxes:
+1. Using the menu options on the left side, find and click on **Query editor (preview)**.
 
-    * Use the name of the server you created in the previous section as the server name, then press Enter.
-        ![A picture of using the free sql db server name as the server name](./media/ch2/deploy3.png)
+    ![A picture of clicking on Query editor (preview) in the left menu](./media/ch2/deploy2c.png)
 
-    * Use the name of the database you created for the free Azure SQL Database as the database name, then press Enter.
-        ![A picture of using the free database as the database name](./media/ch2/deploy4.png)
+1. Next, click on the blue **Continue as ...** (with ... being the user you set as the database admin upon creation) in the Microsoft Entra authentication section.
 
-    * In the Authentication Type dialog box, select “SQL Login“.
-        ![A picture of using SQL Login as as the Authentication Type](./media/ch2/deploy5.png)
+    ![A picture of clicking on Microsoft Entra authentication continue as user blue button](./media/ch2/deploy2d.png)
 
-    * In the User name (SQL Login) dialog box, enter **sqladmin**, then press Enter.
-        ![A picture of entering sqladmin as the database user](./media/ch2/deploy6.png)
+1. The Query Editor will be used in the following chapters for running T-SQL code and procedures.
 
-        and provide the password you used when creating the free Azure SQL Database, then press Enter.
-        ![A picture of entering the password for the database user](./media/ch2/deploy7.png)
-
-    * Select **Yes** so that the password is saved (encrypted) on the connection profile
-        ![A picture of selecting Yes so that the password is saved on the connection profile](./media/ch2/deploy8.png)
-
-    * Provide the profile name of "Free Azure Database" in the last dialog box for this step. Press Enter to finish the connection profile process.
-        ![A picture of using Free Azure Database as the connection profile name](./media/ch2/deploy9.png)
-
-    * After pressing Enter and the connection profile is verified, a warning box **may** appear on the lower right of the screen. This warning is indicating that due to new security features within the database, you need to enable the self-signed certificate.
-        Click the Enable Trust Server Certificate green button to continue.
-
-        ![A picture of clicking the Enable Trust Server Certificate green button to continue](./media/ch2/deploy10.png)
-
-    * There is now a connection to the Azure SQL Database running in the cloud in the code space you can use for deployment and further development.
-
-        ![A picture of code spaces indicating a successful connection](./media/ch2/deploy11.png)
-
-### Publish to an Azure SQL Database
-
-1. To publish the database code to the Free Azure SQL Database, **right click** on the project and select **Publish**.
-
-    ![A picture of right clicking the project name and selecting Publish](./media/ch2/deploy16.png)
-
-1. Select "Publish to an existing Azure SQL logical server" on the first step
-
-    ![A picture of selecting Publish to an existing Azure SQL logical server in the publish database modal flow](./media/ch2/deploy17.png)
-
-1. Next, select "Don't use profile"
-
-    ![A picture of selecting Don't use profile in the publish database modal flow](./media/ch2/deploy18.png)
-
-1. Choose the **Free Azure Database** connection you created previously for the connection profile step
-
-    ![A picture of selecting the Free Azure Database connection in the publish database modal flow](./media/ch2/deploy19.png)
-
-1. Choose **freeDB** as the database.
-
-    ![A picture of selecting the database named freeDB in the publish database modal flow](./media/ch2/deploy20.png)
-
-1. And finally, for the action, choose **Publish**.
-
-    ![A picture of selecting Publish in the publish database modal flow](./media/ch2/deploy21.png)
-
-1. Once the dacpac is published into the database,
-
-    ![A picture of the dacpac being published to the database successfully](./media/ch2/deploy22.png)
-
-    you can go to the SQL Server Connection extension, reload the database objects by right clicking it and selecting refresh,
-
-    ![A picture of reloading the database objects by right clicking it and selecting refresh in the SQL Server extension](./media/ch2/deploy23.png)
-
-     then open the Tables and Programmability folders to see the deployed objects.
-
-    ![A picture of the Tables and Programmability folders to and the deployed objects](./media/ch2/deploy24.png)
-
-### Verify the deployed database objects and data
-
-1. While still on the **SQL Server Connections extension**, right click the database profile name,**Free Azure Database**, and select **New Query**. This will bring up a new query sheet.
-
-    ![A picture of right clicking the Free Azure Database profile name and selecting New Query](./media/ch2/deploy25.png)
-
-1. Run the following code in the query sheet:
-
-    ```SQL
-    select * from dbo.person;
-
-    select p.person_name, a.address
-    from dbo.person p inner join dbo.[address] a
-    on p.person_id = a.person_id;
-    
-    select * from dbo.todo;
-    go
-    ```
-
-1. You can also test out the stored procedure with the following code:
-
-    ```SQL
-    exec get_person_by_pet 'Dogs';
-    ```
-
-## Would you like to know more?
-
-### Azure SQL migration extension for Azure Data Studio
-
-The Azure SQL migration extension for Azure Data Studio enables you to assess, get right-sized Azure recommendations and migrate your SQL Server databases to Azure. You can use the Azure SQL Migration extension to assess SQL Server databases running on Windows or Linux.
-
-The Azure SQL Migration extension for Azure Data Studio offers these key benefits:
-
-* A responsive UI for an end-to-end migration experience. The extension starts with a migration readiness assessment and SKU recommendation (preview) (based on performance data).
-* An enhanced assessment mechanism that can evaluate SQL Server instances. The extension identifies databases that are ready to migrate to Azure SQL targets.
-* An SKU recommendation engine that collects performance data from the on-premises source SQL Server instance and then generates right-sized SKU recommendations based on your Azure SQL target.
-* A reliable Azure service powered by Azure Database Migration Service that orchestrates data movement activities to deliver a seamless migration experience.
-* You can run your migration online (for migrations that require minimal downtime) or offline (for migrations where downtime persists throughout the migration) depending on your business requirements.
-* You can configure a self-hosted integration runtime to use your own compute resources to access the source SQL Server instance backup files in your on-premises environment.
-* Provides a secure and improved user experience for migrating TDE databases and SQL/Windows logins to Azure SQL.
-
-### Proof of concepts and samples
-
-* [SQL Server migration one-click PoC to Azure SQL](https://aka.ms/SQLMigrationPoC)
-* [Migrate databases at scale using Azure Database Migration automation](https://github.com/Azure-Samples/data-migration-sql)
+    ![A picture of the query editor](./media/ch2/deploy2e.png)
