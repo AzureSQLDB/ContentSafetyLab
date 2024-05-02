@@ -157,3 +157,15 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
     ![A picture of the query editor](./media/ch2/deploy2e.png)
 
 #### Option 2: Using Azure Data Studio
+
+
+![A picture of ](./media/ch2/deploy3a.png)
+
+![A picture of ](./media/ch2/deploy3b.png)
+
+![A picture of ](./media/ch2/deploy3c.png)
+
+![A picture of ](./media/ch2/deploy3d.png)
+
+![A picture of ](./media/ch2/deploy3e.png)
+
