@@ -132,7 +132,9 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
     ![A picture of clicking the save button in the lower left of the page](./media/ch2/deploy1x.png)
 
-### Connect to the free Azure SQL Database in the Azure Portal
+### Connect to the free Azure SQL Database
+
+#### Option 1: Using the Query Editor in the Azure Portal
 
 1. Using the menu on the left side, open the menu items under **Settings** if not alreay opened. Then select **SQL Databases** by clicking on it.
 
@@ -153,3 +155,5 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 1. The Query Editor will be used in the following chapters for running T-SQL code and procedures.
 
     ![A picture of the query editor](./media/ch2/deploy2e.png)
+
+#### Option 2: Using Azure Data Studio
