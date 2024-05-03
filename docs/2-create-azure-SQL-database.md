@@ -160,25 +160,25 @@ The next section of the workshop will be using an Azure SQL Database. To move ou
 
 1. Azure Data Studio is another option for working with the database with a dedicated client tool. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open Azure Data Studio** button.
 
-![A picture of clicking on the blue Open Azure Data Studio button](./media/ch2/deploy3a.png)
+    ![A picture of clicking on the blue Open Azure Data Studio button](./media/ch2/deploy3a.png)
 
 1. On the following page, if Azure Data Studio is not installed, click on the blue **Download Azure Data Studio** button to start that process. If it is already installed or was just installed, click on the **Launch it now** link.
 
-![A picture of downloading or launching Azure Data Studio from the Azure portal](./media/ch2/deploy3b.png)
+    ![A picture of downloading or launching Azure Data Studio from the Azure portal](./media/ch2/deploy3b.png)
 
 1. The link will launch Azure Data Studio and pre-create a database connection profile with the database details for the Azure SQL Database that was just created. Start by changing the **Authentication Type** to **Microsoft Entra ID**.
 
-![A picture of changing the Authentication Type to Microsoft Entra ID](./media/ch2/deploy3c.png)
+    ![A picture of changing the Authentication Type to Microsoft Entra ID](./media/ch2/deploy3c.png)
 
 1. For the **Account** field, if you have been authenticated previously, an email address will be present. Select your email address for the account field. Once the profile is filled out, click the blue **Connect** button.
 
-![A picture of selecting your email address for the account field](./media/ch2/deploy3d.png)
+    ![A picture of selecting your email address for the account field](./media/ch2/deploy3d.png)
 
 1. If no account has been set/logged in, select the **Add an account** option and authenticate via the Azure portal.
 
-![A picture of selecting the Add an account option and authenticate via the Azure portal](./media/ch2/deploy3e.png)
+    ![A picture of selecting the Add an account option and authenticate via the Azure portal](./media/ch2/deploy3e.png)
 
 1. Once connected to the database, right click on the connection name in the connection navigator on the left side and choose **New Query**.
 
-![A picture of right clicking on the connection name in the connection navigator on the left side and choosing New Query](./media/ch2/deploy3f.png)
+    ![A picture of right clicking on the connection name in the connection navigator on the left side and choosing New Query](./media/ch2/deploy3f.png)
 
