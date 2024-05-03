@@ -1,8 +1,22 @@
+![A picture of the Microsoft Logo](./media/graphics/microsoftlogo.png)
+
+# Call REST services from the Azure SQL Database with External REST Endpoint Invocation
+
+![A picture of multiple Azure Services that External REST Endpoint Invocation can use](./media/ch3/rest1.png)
+
+## External REST Endpoint Invocation
+
+Azure SQL Database External REST Endpoint Invocation provides the ability to call REST endpoints from other Azure services such as OpenAI, communications, Azure Functions, PowerBI and more. Common use cases for developers to use External REST Endpoint Invocation are:
+
+* Ability to push business logic out of the database and into Azure Functions
+* Pull/push data to/from external sources (including Azure Blob Storage) for ETL or derived data stores
+* Participate in event based architectures with Azure Event Hub or Kafka
+
+External REST Endpoint Invocation can be called in an Azure SQL Database using the sp_invoke_external_rest_endpoint stored procedure. The following exercises and examples will guide you through calling various Azure Services and seeing how you can integrate REST into your applications and database development implementations.
+
 # Getting started with REST in the Azure SQL Database
 
 In this section, you will test the External REST Endpoint Invocation (EREI) feature of the database to ensure you have connectivity to other Azure services like Azure Functions, AI Language and Content Safety.
-
-## Testing EREI
 
 ### Using T-SQL to check connectivity to Azure Services
 
