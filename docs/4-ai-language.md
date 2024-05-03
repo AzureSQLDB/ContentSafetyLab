@@ -149,7 +149,7 @@ The Answer Questions capability attempts to extract the answer to a given questi
 
     ```SQL
     declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:query-text?api-version=2023-04-01';
-    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxxxx"}';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
     declare @message nvarchar(max);
     SET @message = (SELECT [Description]
                     FROM [SalesLT].[ProductDescription]
@@ -217,61 +217,146 @@ The Answer Questions capability attempts to extract the answer to a given questi
 
 ### Document summarization
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxxxx"}';
-declare @payload nvarchar(max) = N'{
-  "displayName": "Document ext Summarization Task Example",
-  "analysisInput": {
-    "documents": [
-      {
-        "id": "1",
-        "language": "en",
-        "text": "At Microsoft, we have been on a quest to advance AI beyond existing techniques, by taking a more holistic, human-centric approach to learning and understanding. As Chief Technology Officer of Azure AI services, I have been working with a team of amazing scientists and engineers to turn this quest into a reality. In my role, I enjoy a unique perspective in viewing the relationship among three attributes of human cognition: monolingual text (X), audio or visual sensory signals, (Y) and multilingual (Z). At the intersection of all three, there’s magic—what we call XYZ-code as illustrated in Figure 1—a joint representation to create more powerful AI that can speak, hear, see, and understand humans better. We believe XYZ-code will enable us to fulfill our long-term vision: cross-domain transfer learning, spanning modalities and languages. The goal is to have pre-trained models that can jointly learn representations to support a broad range of downstream AI tasks, much in the way humans do today. Over the past five years, we have achieved human performance on benchmarks in conversational speech recognition, machine translation, conversational question answering, machine reading comprehension, and image captioning. These five breakthroughs provided us with strong signals toward our more ambitious aspiration to produce a leap in AI capabilities, achieving multi-sensory and multilingual learning that is closer in line with how humans learn and understand. I believe the joint XYZ-code is a foundational component of this aspiration, if grounded with external knowledge sources in the downstream AI tasks."
-      }
+This prebuilt summarization API can produce a summary for a conversation or from a document. This is a two step process where we first submit the text as a job then get the results with the **returned job request ID**.
+
+1. Copy the following SQL and paste it into the SQL query editor.
+
+    ```SQL
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @payload nvarchar(max) = N'{
+    "displayName": "Document ext Summarization Task Example",
+    "analysisInput": {
+        "documents": [
+        {
+            "id": "1",
+            "language": "en",
+            "text": "REDMOND, Wash. and Santa Monica, Calif. Jan. 18, 2022 With three billion people actively playing games today, and fueled by a new generation steeped in the joys of interactive entertainment, gaming is now the largest and fastest-growing form of entertainment. Today, Microsoft Corp. (Nasdaq: MSFT) announced plans to acquire Activision Blizzard Inc. (Nasdaq: ATVI), a leader in game development and interactive entertainment content publisher. This acquisition will accelerate the growth in Microsofts gaming business across mobile, PC, console and cloud and will provide building blocks for the metaverse. Microsoft will acquire Activision Blizzard for 95.00 per share, in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzards net cash. When the transaction closes, Microsoft will become the worlds third-largest gaming company by revenue, behind Tencent and Sony. The planned acquisition includes iconic franchises from the Activision, Blizzard and King studios like Warcraft, Diablo, Overwatch, Call of Duty and Candy Crush, in addition to global eSports activities through Major League Gaming. The company has studios around the world with nearly 10,000 employees. Bobby Kotick will continue to serve as CEO of Activision Blizzard, and he and his team will maintain their focus on driving efforts to further strengthen the companys culture and accelerate business growth. Once the deal closes, the Activision Blizzard business will report to Phil Spencer, CEO, Microsoft Gaming. Gaming is the most dynamic and exciting category in entertainment across all platforms today and will play a key role in the development of metaverse platforms, said Satya Nadella, chairman and CEO, Microsoft. Were investing deeply in world-class content, community and the cloud to usher in a new era of gaming that puts players and creators first and makes gaming safe, inclusive and accessible to all. Players everywhere love Activision Blizzard games, and we believe the creative teams have their best work in front of them, said Phil Spencer, CEO, Microsoft Gaming. Together we will build a future where people can play the games they want, virtually anywhere they want. For more than 30 years our incredibly talented teams have created some of the most successful games, said Bobby Kotick, CEO, Activision Blizzard. The combination of Activision Blizzards world-class talent and extraordinary franchises with Microsofts technology, distribution, access to talent, ambitious vision and shared commitment to gaming and inclusion will help ensure our continued success in an increasingly competitive industry. Mobile is the largest segment in gaming, with nearly 95 of all players globally enjoying games on mobile. Through great teams and great technology, Microsoft and Activision Blizzard will empower players to enjoy the most-immersive franchises, like Halo and Warcraft, virtually anywhere they want. And with games like Candy Crush, Activision Blizzards mobile business represents a significant presence and opportunity for Microsoft in this fast-growing segment. The acquisition also bolsters Microsofts Game Pass portfolio with plans to launch Activision Blizzard games into Game Pass, which has reached a new milestone of over 25 million subscribers. With Activision Blizzards nearly 400 million monthly active players in 190 countries and three billion-dollar franchises, this acquisition will make Game Pass one of the most compelling and diverse lineups of gaming content in the industry. Upon close, Microsoft will have 30 internal game development studios, along with additional publishing and esports production capabilities. The transaction is subject to customary closing conditions and completion of regulatory review and Activision Blizzards shareholder approval. The deal is expected to close in fiscal year 2023 and will be accretive to non-GAAP earnings per share upon close. The transaction has been approved by the boards of directors of both Microsoft and Activision Blizzard."
+        }
+        ]
+    },
+    "tasks": [
+        {
+        "kind": "ExtractiveSummarization",
+        "taskName": "Document Extractive Summarization Task 1",
+        "parameters": {
+            "sentenceCount": 6
+        }
+        }
     ]
-  },
-  "tasks": [
+    }';
+
+    declare @ret int, @response nvarchar(max);
+
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the results and find the **operation-location** value which will look like **"operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01"**:
+
+    ```JSON
     {
-      "kind": "ExtractiveSummarization",
-      "taskName": "Document Extractive Summarization Task 1",
-      "parameters": {
-        "sentenceCount": 6
-      }
+        "response": {
+            "status": {
+                "http": {
+                    "code": 202,
+                    "description": ""
+                }
+            },
+            "headers": {
+                "Date": "Fri, 03 May 2024 20:31:10 GMT",
+                "Content-Length": "0",
+                "operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01",
+                "x-envoy-upstream-service-time": "238",
+                "apim-request-id": "abababab-abab-1234-1122-abababababab",
+                "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+                "x-content-type-options": "nosniff",
+                "x-ms-region": "West US"
+            }
+        }
     }
-  ]
-}';
+    ```
 
-declare @ret int, @response nvarchar(max);
+1. Copy the value in the URL between **jobs\/** and **?api-version=2023-04-01** and use it in the following request. For example, in this string 
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    ``` JSON
+    "operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01"
+    ```
+    you would take 1111-2222-4444-111.
 
-select @ret as ReturnCode, @response as Response;
-```
+1. Copy and paste the following code into the query editor.
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs/000000000?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxx"}';
-declare @ret int, @response nvarchar(max);
+    ```SQL
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs/OPERATION-LOCATION-ID?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @ret int, @response nvarchar(max);
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'GET',
-	@headers = @headers,
-	--@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'GET',
+        @headers = @headers,
+        @timeout = 230,
+        @response = @response output;
 
-select @ret as ReturnCode, @response as Response;
-```
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity. Replace the **OPERATION-LOCATION-ID** with the **operation-location** value from the response message.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message. You will see that the service took out the key phrases and listed them in the response message.
+
+    ```JSON
+    "sentences": [
+    {
+        "text": "Today, Microsoft Corp. (Nasdaq: MSFT) announced plans to acquire Activision Blizzard Inc. (Nasdaq: ATVI), a leader in game development and interactive entertainment content publisher.",
+        "rankScore": 0.9,
+        "offset": 260,
+        "length": 183
+    },
+    {
+        "text": "This acquisition will accelerate the growth in Microsofts gaming business across mobile, PC, console and cloud and will provide building blocks for the metaverse.",
+        "rankScore": 0.83,
+        "offset": 444,
+        "length": 162
+    },
+    {
+        "text": "Microsoft will acquire Activision Blizzard for 95.00 per share, in an all-cash transaction valued at $68.7 billion, inclusive of Activision Blizzards net cash.",
+        "rankScore": 1.0,
+        "offset": 607,
+        "length": 159
+    },
+    {
+        "text": "When the transaction closes, Microsoft will become the worlds third-largest gaming company by revenue, behind Tencent and Sony.",
+        "rankScore": 0.98,
+        "offset": 767,
+        "length": 127
+    },
+    {
+        "text": "The planned acquisition includes iconic franchises from the Activision, Blizzard and King studios like Warcraft, Diablo, Overwatch, Call of Duty and Candy Crush, in addition to global eSports activities through Major League Gaming.",
+        "rankScore": 0.63,
+        "offset": 895,
+        "length": 231
+    },
+    {
+        "text": "The company has studios around the world with nearly 10,000 employees.",
+        "rankScore": 0.52,
+        "offset": 1127,
+        "length": 70
+    }
+    ```
 
 ### Sentiment analysis
 
