@@ -263,7 +263,7 @@ This prebuilt summarization API can produce a summary for a conversation or from
 
 1. Execute the SQL statement with the run button.
 
-1. View the results and find the **operation-location** value which will look like **"operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01"**:
+1. View the results and find the **operation-location** value.
 
     ```JSON
     {
