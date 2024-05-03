@@ -2,7 +2,7 @@
 
 # Create and Connect to an Azure SQL Database
 
-The next section of the workshop will be creating and connecting to an Azure SQL Database.
+The next section of the workshop you will be creating and connecting to an Azure SQL Database.
 
 ## Azure SQL Database create and connect workshop tasks
 
