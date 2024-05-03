@@ -457,7 +457,7 @@ The Language Detection feature of the Azure AI Language REST API evaluates text 
     declare @message nvarchar(max);
     SET @message = (SELECT top 1 d.[Description]
                     FROM [SalesLT].[ProductDescription] d,
-                        [SalesLT].[ProductModelProductDescription] l
+                         [SalesLT].[ProductModelProductDescription] l
                     WHERE d.ProductDescriptionID = l.ProductDescriptionID
                     AND l.Culture = 'fr');
 
@@ -514,7 +514,7 @@ The Language Detection feature of the Azure AI Language REST API evaluates text 
     ```SQL
         SET @message = (SELECT top 1 d.[Description]
                     FROM [SalesLT].[ProductDescription] d,
-                        [SalesLT].[ProductModelProductDescription] l
+                         [SalesLT].[ProductModelProductDescription] l
                     WHERE d.ProductDescriptionID = l.ProductDescriptionID
                     AND l.Culture = 'LANGUAGE-HERE');
     ```
