@@ -609,9 +609,13 @@ This prebuilt capability uses Named Entity Recognition (NER) to identify entitie
 
 ### Entity Linking
 
+This prebuilt capability disambiguates the identity of an entity found in text by linking to a Wikipedia article.
+
+1. Copy the following SQL and paste it into the SQL query editor.
+
 ```SQL
 declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"XXXX"}';
+declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
 declare @payload nvarchar(max) = N'{
     "kind": "EntityLinking",
     "parameters": {
@@ -636,12 +640,36 @@ exec @ret = sp_invoke_external_rest_endpoint
 	@headers = @headers,
 	@payload = @payload,
     @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
 	@response = @response output;
 
 select @ret as ReturnCode, @response as Response;
 ```
 
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message.
+
+    ```JSON
+    "entities": [
+    {
+        "bingId": "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85",
+        "name": "Microsoft",
+        "matches": [
+            {
+                "text": "Microsoft",
+                "offset": 0,
+                "length": 9,
+                "confidenceScore": 0.48
+            }
+        ],
+        "language": "en",
+        "id": "Microsoft",
+        "url": "https://en.wikipedia.org/wiki/Microsoft",
+        "dataSource": "Wikipedia"
+    }...
+    ```
 
 <details>
     <summary>(<i>click to for the answer</i>)</summary>
