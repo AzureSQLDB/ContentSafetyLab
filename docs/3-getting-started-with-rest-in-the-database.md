@@ -26,7 +26,7 @@ SELECT @ret AS ReturnCode, @response AS Response;
 
 ![A picture of clicking the Run button](./media/ch3/testing1.png)
 
-1, Hover over the results to see the response message. It should look similar to the following.
+1. Hover over the results to see the response message. It should look similar to the following.
 
 ```JSON
 {
