@@ -449,37 +449,77 @@ Azure AI Language Sentiment Analysis feature provides sentiment labels (such as 
 
 ### Language detection
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
-declare @payload nvarchar(max) = N'{
-    "kind": "LanguageDetection",
-    "parameters": {
-        "modelVersion": "latest"
-    },
-    "analysisInput":{
-        "documents":[
+The Language Detection feature of the Azure AI Language REST API evaluates text input for each document and returns language identifiers with a score that indicates the strength of the analysis. This capability is useful for content stores that collect arbitrary text, where language is unknown. You can parse the results of this analysis to determine which language is used in the input document. The response also returns a score that reflects the confidence of the model. The score value is between 0 and 1.
+
+1. Copy the following SQL and paste it into the SQL query editor.
+
+    ```SQL
+    declare @message nvarchar(max);
+    SET @message = (SELECT top 1 d.[Description]
+                    FROM [SalesLT].[ProductDescription] d,
+                        [SalesLT].[ProductModelProductDescription] l
+                    WHERE d.ProductDescriptionID = l.ProductDescriptionID
+                    AND l.Culture = 'fr');
+
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"5f0668aba78a4827bddf38a9fd738957"}';
+    declare @payload nvarchar(max) = N'{
+        "kind": "LanguageDetection",
+        "parameters": {
+            "modelVersion": "latest"
+        },
+        "analysisInput":{
+            "documents":[
+                {
+                    "id":"1",
+                    "text": "' + @message + '"
+                }
+            ]
+        }
+    }';
+
+    declare @ret int, @response nvarchar(max);
+
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message. You can see the detected language and the confidence score.
+
+    ```JSON
+    "results": {
+        "documents": [
             {
-                "id":"1",
-                "text": "This is a document written in English."
-            }
-        ]
-    }
-}';
+                "id": "1",
+                "detectedLanguage": {
+                    "name": "French",
+                    "iso6391Name": "fr",
+                    "confidenceScore": 1.0
+                },
+    ```
 
-declare @ret int, @response nvarchar(max);
+1. You can try other languages by just altering the where clause in the SQL statement that set the @message variable. The accepted values you can use are: zh-cht, he, th, fr, ar, and en.     
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    ```SQL
+        SET @message = (SELECT top 1 d.[Description]
+                    FROM [SalesLT].[ProductDescription] d,
+                        [SalesLT].[ProductModelProductDescription] l
+                    WHERE d.ProductDescriptionID = l.ProductDescriptionID
+                    AND l.Culture = 'LANGUAGE-HERE');
+    ```
 
-select @ret as ReturnCode, @response as Response;
-```
+    Replace the **LANGUAGE-HERE** with one of the above values and retry the request.
 
 ### Named Entity Recognition (NER)
 
