@@ -29,13 +29,15 @@ Language Studio enables you to use the below service features without needing to
 | Question answering | Question answering is a custom feature that finds the most appropriate answer for inputs from your users, and is commonly used to build conversational client applications, such as social media applications, chat bots, and speech-enabled desktop applications.|
 | Custom text analytics for health | Custom text analytics for health is a custom feature that extract healthcare specific entities from unstructured text, using a model you create.|
 
-**Table 1:** Azure AI Language Feature
+**Table 1:** Azure AI Language Features
 
-# Getting started with REST in the Azure SQL Database
+# Getting started with Azure AI Language Service and REST in the Azure SQL Database
 
-In this section, you will test the External REST Endpoint Invocation (EREI) feature of the database to ensure you have connectivity to other Azure services by calling an Azure Function.
+In this section, you will use Azure AI Language Service with the External REST Endpoint Invocation (EREI) feature of the database to call various endpoints to see how data in the database can be paired with AI features.
 
 ## PII and Redaction
+
+The first endpoint we will use is the Personally Identifiable Information (PII) detection service. The PII detection feature can identify, categorize, and redact sensitive information in unstructured text. For example: phone numbers, email addresses, and forms of identification. 
 
 ```SQL
 declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
