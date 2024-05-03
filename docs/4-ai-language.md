@@ -28,6 +28,7 @@ Language Studio enables you to use the below service features without needing to
 | Orchestration workflow | Orchestration workflow is a custom feature that enables you to connect Conversational Language Understanding (CLU), question answering, and LUIS applications.|
 | Question answering | Question answering is a custom feature that finds the most appropriate answer for inputs from your users, and is commonly used to build conversational client applications, such as social media applications, chat bots, and speech-enabled desktop applications.|
 | Custom text analytics for health | Custom text analytics for health is a custom feature that extract healthcare specific entities from unstructured text, using a model you create.|
+
 **Table 1:** Azure AI Language Feature
 
 # Getting started with REST in the Azure SQL Database
