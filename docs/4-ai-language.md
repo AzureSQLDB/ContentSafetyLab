@@ -462,7 +462,7 @@ The Language Detection feature of the Azure AI Language REST API evaluates text 
                     AND l.Culture = 'fr');
 
     declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"5f0668aba78a4827bddf38a9fd738957"}';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
     declare @payload nvarchar(max) = N'{
         "kind": "LanguageDetection",
         "parameters": {
