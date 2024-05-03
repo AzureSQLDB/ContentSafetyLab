@@ -39,9 +39,11 @@ In this section, you will use Azure AI Language Service with the External REST E
 
 The first endpoint we will use is the Personally Identifiable Information (PII) detection service. The PII detection feature can identify, categorize, and redact sensitive information in unstructured text. For example: phone numbers, email addresses, and forms of identification. 
 
+1. Copy the following SQL and paste it into the SQL query editor.
+
 ```SQL
 declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxxxxx"}';
+declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
 declare @payload nvarchar(max) = N'{
     "kind": "PiiEntityRecognition",
     "analysisInput":
@@ -65,29 +67,78 @@ exec @ret = sp_invoke_external_rest_endpoint
 	@headers = @headers,
 	@payload = @payload,
     @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
 	@response = @response output;
 
 select @ret as ReturnCode, @response as Response;
+```
 
-SELECT A.[value] as "Redacted Text"
-FROM OPENJSON(@response,'$.result.results.documents') AS D
-CROSS APPLY OPENJSON([value]) as A
-where A.[key] = 'redactedText'
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
 
-select JSON_VALUE(B.[value],'$.category') as "PII Category",
-JSON_VALUE(B.[value],'$.text') as "PII Value",
-CONVERT(FLOAT,JSON_VALUE(B.[value],'$.confidenceScore'))*100 as "Confidence Score"
-from OPENJSON(
-(
-    SELECT A.[value] --D.[key] as "PII Type", JSON_VALUE(A.[value],'$.Text') as "PII Value"
-FROM OPENJSON(@response,'$.result.results.documents') AS D
-CROSS APPLY OPENJSON([value]
-) AS A 
-where A.[key] = 'entities'
-), '$') AS B
+1. Execute the SQL statement with the run button.
 
-GO
+1. View the return message. Points you will want to examine are where the text came back with all PII redacted and the section where each piece of PII is categorized.
+
+```JSON
+"redactedText": "***************, this is my phone is **********, and my IP: *************** ********* *********************, My Addresses are **********************************, SSN ***********, *************************************",
+"id": "1",
+"entities": [
+    {
+        "text": "abcdef@abcd.com",
+        "category": "Email",
+        "offset": 0,
+        "length": 15,
+        "confidenceScore": 0.8
+    },
+    {
+        "text": "6657789887",
+        "category": "EUTaxIdentificationNumber",
+        "offset": 37,
+        "length": 10,
+        "confidenceScore": 0.93
+    },
+    {
+        "text": "255.255.255.255",
+        "category": "IPAddress",
+        "offset": 60,
+        "length": 15,
+        "confidenceScore": 0.8
+    },
+    {
+        "text": "127.0.0.1",
+        "category": "IPAddress",
+        "offset": 76,
+        "length": 9,
+        "confidenceScore": 0.8
+    },
+    {
+        "text": "fluffybunny@bunny.net",
+        "category": "Email",
+        "offset": 86,
+        "length": 21,
+        "confidenceScore": 0.8
+    },
+    {
+        "text": "1 Microsoft Way, Redmond, WA 98052",
+        "category": "Address",
+        "offset": 126,
+        "length": 34,
+        "confidenceScore": 1.0
+    },
+    {
+        "text": "543-55-6654",
+        "category": "USSocialSecurityNumber",
+        "offset": 166,
+        "length": 11,
+        "confidenceScore": 0.85
+    },
+    {
+        "text": "123 zoo street chickenhouse, AZ 55664",
+        "category": "Address",
+        "offset": 179,
+        "length": 37,
+        "confidenceScore": 0.95
+    }
+],
 ```
 
 ### Answer Questions
@@ -322,3 +373,36 @@ exec @ret = sp_invoke_external_rest_endpoint
 
 select @ret as ReturnCode, @response as Response;
 ```
+
+
+<details>
+    <summary>(<i>click to for the answer</i>)</summary>
+    <!-- have to be followed by an empty line! -->
+
+Something about the answer here
+
+```SQL
+select * from answer with
+JASON_VALUES(xxxxxx)
+```
+</details>
+
+
+SELECT A.[value] as "Redacted Text"
+FROM OPENJSON(@response,'$.result.results.documents') AS D
+CROSS APPLY OPENJSON([value]) as A
+where A.[key] = 'redactedText'
+
+select JSON_VALUE(B.[value],'$.category') as "PII Category",
+JSON_VALUE(B.[value],'$.text') as "PII Value",
+CONVERT(FLOAT,JSON_VALUE(B.[value],'$.confidenceScore'))*100 as "Confidence Score"
+from OPENJSON(
+(
+    SELECT A.[value] --D.[key] as "PII Type", JSON_VALUE(A.[value],'$.Text') as "PII Value"
+FROM OPENJSON(@response,'$.result.results.documents') AS D
+CROSS APPLY OPENJSON([value]
+) AS A 
+where A.[key] = 'entities'
+), '$') AS B
+
+GO
