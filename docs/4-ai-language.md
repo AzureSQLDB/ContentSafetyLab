@@ -523,38 +523,89 @@ The Language Detection feature of the Azure AI Language REST API evaluates text 
 
 ### Named Entity Recognition (NER)
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"XXXX"}';
-declare @payload nvarchar(max) = N'{
-    "kind": "EntityRecognition",
-    "parameters": {
-        "modelVersion": "latest"
-    },
-    "analysisInput":{
-        "documents":[
-            {
-                "id":"1",
-                "language": "en",
-                "text": "I had a wonderful trip to Seattle last week."
-            }
-        ]
-    }
-}';
+This prebuilt capability uses Named Entity Recognition (NER) to identify entities in text and categorize them into pre-defined classes or types such as: person, location, event, product, and organization. This request again pulls from the Adventure Works data for text analysis.
 
-declare @ret int, @response nvarchar(max);
+1. Copy the following SQL and paste it into the SQL query editor.
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    ```SQL
+    declare @message nvarchar(max);
+    SET @message = (SELECT [Description]
+        FROM [SalesLT].[ProductDescription]
+        WHERE ProductDescriptionID = 513);
 
-select @ret as ReturnCode, @response as Response;
-```
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @payload nvarchar(max) = N'{
+        "kind": "EntityRecognition",
+        "parameters": {
+            "modelVersion": "latest"
+        },
+        "analysisInput":{
+            "documents":[
+                {
+                    "id":"1",
+                    "language": "en",
+                    "text": "' + @message + '"
+                }
+            ]
+        }
+    }';
+
+    declare @ret int, @response nvarchar(max);
+
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message. You can see how it extracted key words and classified them (with some have multiple levels of classification).
+
+    ```JSON
+    "entities": [
+        {
+            "text": "bike",
+            "category": "Product",
+            "offset": 19,
+            "length": 4,
+            "confidenceScore": 0.92
+        },
+        {
+            "text": "tires",
+            "category": "Product",
+            "offset": 94,
+            "length": 5,
+            "confidenceScore": 0.98
+        },
+        {
+            "text": "town",
+            "category": "Location",
+            "subcategory": "Structural",
+            "offset": 118,
+            "length": 4,
+            "confidenceScore": 0.75
+        },
+        {
+            "text": "weekend",
+            "category": "DateTime",
+            "subcategory": "DateRange",
+            "offset": 126,
+            "length": 7,
+            "confidenceScore": 0.97
+        }
+    ],
+    ```
+
+1. If you want to expriment with this, you can change the **ProductDescriptionID** in the SQL statement that sets the message. Some values you can use are 661, 1062, or 647.
 
 ### Entity Linking
 
