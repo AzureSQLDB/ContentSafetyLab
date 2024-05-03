@@ -41,36 +41,36 @@ The first endpoint we will use is the Personally Identifiable Information (PII) 
 
 1. Copy the following SQL and paste it into the SQL query editor.
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
-declare @payload nvarchar(max) = N'{
-    "kind": "PiiEntityRecognition",
-    "analysisInput":
-    {
-        "documents":
-        [
-            {
-                "id":"1",
-                "language": "en",
-                "text": "abcdef@abcd.com, this is my phone is 6657789887, and my IP: 255.255.255.255 127.0.0.1 fluffybunny@bunny.net, My Addresses are 1 Microsoft Way, Redmond, WA 98052, SSN 543-55-6654, 123 zoo street chickenhouse, AZ 55664"
-            }
-        ]
-    }
-}';
+    ```SQL
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @payload nvarchar(max) = N'{
+        "kind": "PiiEntityRecognition",
+        "analysisInput":
+        {
+            "documents":
+            [
+                {
+                    "id":"1",
+                    "language": "en",
+                    "text": "abcdef@abcd.com, this is my phone is 6657789887, and my IP: 255.255.255.255 127.0.0.1 fluffybunny@bunny.net, My Addresses are 1 Microsoft Way, Redmond, WA 98052, SSN 543-55-6654, 123 zoo street chickenhouse, AZ 55664"
+                }
+            ]
+        }
+    }';
 
-declare @ret int, @response nvarchar(max);
+    declare @ret int, @response nvarchar(max);
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
-	@response = @response output;
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
 
-select @ret as ReturnCode, @response as Response;
-```
+    select @ret as ReturnCode, @response as Response;
+    ```
 
 1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
 
@@ -78,103 +78,142 @@ select @ret as ReturnCode, @response as Response;
 
 1. View the return message. Points you will want to examine are where the text came back with all PII redacted and the section where each piece of PII is categorized.
 
-```JSON
-"redactedText": "***************, this is my phone is **********, and my IP: *************** ********* *********************, My Addresses are **********************************, SSN ***********, *************************************",
-"id": "1",
-"entities": [
-    {
-        "text": "abcdef@abcd.com",
-        "category": "Email",
-        "offset": 0,
-        "length": 15,
-        "confidenceScore": 0.8
-    },
-    {
-        "text": "6657789887",
-        "category": "EUTaxIdentificationNumber",
-        "offset": 37,
-        "length": 10,
-        "confidenceScore": 0.93
-    },
-    {
-        "text": "255.255.255.255",
-        "category": "IPAddress",
-        "offset": 60,
-        "length": 15,
-        "confidenceScore": 0.8
-    },
-    {
-        "text": "127.0.0.1",
-        "category": "IPAddress",
-        "offset": 76,
-        "length": 9,
-        "confidenceScore": 0.8
-    },
-    {
-        "text": "fluffybunny@bunny.net",
-        "category": "Email",
-        "offset": 86,
-        "length": 21,
-        "confidenceScore": 0.8
-    },
-    {
-        "text": "1 Microsoft Way, Redmond, WA 98052",
-        "category": "Address",
-        "offset": 126,
-        "length": 34,
-        "confidenceScore": 1.0
-    },
-    {
-        "text": "543-55-6654",
-        "category": "USSocialSecurityNumber",
-        "offset": 166,
-        "length": 11,
-        "confidenceScore": 0.85
-    },
-    {
-        "text": "123 zoo street chickenhouse, AZ 55664",
-        "category": "Address",
-        "offset": 179,
-        "length": 37,
-        "confidenceScore": 0.95
-    }
-],
-```
+    ```JSON
+    "redactedText": "***************, this is my phone is **********, and my IP: *************** ********* *********************, My Addresses are **********************************, SSN ***********, *************************************",
+    "id": "1",
+    "entities": [
+        {
+            "text": "abcdef@abcd.com",
+            "category": "Email",
+            "offset": 0,
+            "length": 15,
+            "confidenceScore": 0.8
+        },
+        {
+            "text": "6657789887",
+            "category": "EUTaxIdentificationNumber",
+            "offset": 37,
+            "length": 10,
+            "confidenceScore": 0.93
+        },
+        {
+            "text": "255.255.255.255",
+            "category": "IPAddress",
+            "offset": 60,
+            "length": 15,
+            "confidenceScore": 0.8
+        },
+        {
+            "text": "127.0.0.1",
+            "category": "IPAddress",
+            "offset": 76,
+            "length": 9,
+            "confidenceScore": 0.8
+        },
+        {
+            "text": "fluffybunny@bunny.net",
+            "category": "Email",
+            "offset": 86,
+            "length": 21,
+            "confidenceScore": 0.8
+        },
+        {
+            "text": "1 Microsoft Way, Redmond, WA 98052",
+            "category": "Address",
+            "offset": 126,
+            "length": 34,
+            "confidenceScore": 1.0
+        },
+        {
+            "text": "543-55-6654",
+            "category": "USSocialSecurityNumber",
+            "offset": 166,
+            "length": 11,
+            "confidenceScore": 0.85
+        },
+        {
+            "text": "123 zoo street chickenhouse, AZ 55664",
+            "category": "Address",
+            "offset": 179,
+            "length": 37,
+            "confidenceScore": 0.95
+        }
+    ],
+    ```
 
 ### Answer Questions
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:query-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxxxx"}';
-declare @payload nvarchar(max) = N'{
-  "question": "how long it takes to charge surface?",
-  "records": [
-    {
-      "id": "1",
-      "text": "Power and charging. It takes two to four hours to charge the Surface Pro 4 battery fully from an empty state. It can take longer if you’re using your Surface for power-intensive activities like gaming or video streaming while you’re charging it."
-    },
-    {
-      "id": "2",
-      "text": "You can use the USB port on your Surface Pro 4 power supply to charge other devices, like a phone, while your Surface charges. The USB port on the power supply is only for charging, not for data transfer. If you want to use a USB device, plug it into the USB port on your Surface."
-    }
-  ],
-  "language": "en"
-}';
+The Answer Questions capability attempts to extract the answer to a given question from the passage of text provided. Extract questions and answers from your semi-structured content, including FAQs, manuals, database data, and documents.
 
-declare @ret int, @response nvarchar(max);
+1. Copy the following SQL and paste it into the SQL query editor. This example uses a description from the Adventure Works ProductDescription table to seed the session.
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    ```SQL
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:query-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxxxx"}';
+    declare @message nvarchar(max);
+    SET @message = (SELECT [Description]
+                    FROM [SalesLT].[ProductDescription]
+                    WHERE ProductDescriptionID = 457);
+    declare @payload nvarchar(max) = N'{
+    "question": "What is the bike made from?",
+    "records": [
+        {
+        "id": "1",
+        "text": "'+ @message +'"
+        }
+    ],
+    "language": "en"
+    }';
 
-select @ret as ReturnCode, @response as Response;
-```
+    declare @ret int, @response nvarchar(max);
 
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message. You can see the confidence score for each answer as to how it feels it performed based on the text provided and the question asked.
+
+    ```JSON
+    "answers": [
+      {
+        "answer": "Developed with the Adventure Works Cycles professional race team, it has a extremely light heat-treated aluminum frame, and steering that allows precision control.",
+        "confidenceScore": 0.5158345103263855,
+        "id": "1",
+        "answerSpan": {
+          "text": "aluminum",
+          "confidenceScore": 0.8578997,
+          "offset": 103,
+          "length": 9
+        },
+        "offset": 37,
+        "length": 163
+      },
+      {
+        "answer": "This bike is ridden by race winners. Developed with the Adventure Works Cycles professional race team, it has a extremely light heat-treated aluminum frame, and steering that allows precision control.",
+        "confidenceScore": 0.4569839537143707,
+        "id": "1",
+        "answerSpan": {
+          "text": "aluminum",
+          "confidenceScore": 0.8340067,
+          "offset": 140,
+          "length": 9
+        },
+        "offset": 0,
+        "length": 200
+      }
+    ]
+    ```    
 
 ### Document summarization
 
