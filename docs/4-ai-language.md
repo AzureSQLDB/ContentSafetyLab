@@ -293,7 +293,7 @@ This prebuilt summarization API can produce a summary for a conversation or from
     ``` JSON
     "operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01"
     ```
-    you would take 1111-2222-4444-111.
+    you would take **1111-2222-4444-111**.
 
 1. Copy and paste the following code into the query editor.
 
@@ -360,45 +360,98 @@ This prebuilt summarization API can produce a summary for a conversation or from
 
 ### Sentiment analysis
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"xxxxx"}';
-declare @payload nvarchar(max) = N'{
-	"kind": "SentimentAnalysis",
-	"parameters": {
-		"modelVersion": "latest",
-		"opinionMining": "True"
-	},
-	"analysisInput":{
-		"documents":[
-			{
-				"id":"1",
-				"language":"en",
-				"text": "The food and service were unacceptable. The concierge was nice, however."
-			}
-		]
-	}
-} ';
+Azure AI Language Sentiment Analysis feature provides sentiment labels (such as "negative", "neutral" and "positive") and confidence scores at the sentence and document-level. You can also send Opinion Mining requests using the Sentiment Analysis endpoint, which provides granular information about the opinions related to words (such as the attributes of products or services) in the text.
 
-declare @ret int, @response nvarchar(max);
+1. Copy the following SQL and paste it into the SQL query editor.
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
-	@response = @response output;
+    ```SQL
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @payload nvarchar(max) = N'{
+        "kind": "SentimentAnalysis",
+        "parameters": {
+            "modelVersion": "latest",
+            "opinionMining": "False"
+        },
+        "analysisInput":{
+            "documents":[
+                {
+                    "id":"1",
+                    "language":"en",
+                    "text": "The food and service were unacceptable. The concierge was nice, however."
+                }
+            ]
+        }
+    } ';
 
-select @ret as ReturnCode, @response as Response;
-```
+    declare @ret int, @response nvarchar(max);
+
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
+
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message. You can see that the overall message was mixed and it classified one positive and one negitive sentence in the text.
+
+    ```JSON
+    "documents": [
+    {
+        "id": "1",
+        "sentiment": "mixed",
+        "confidenceScores": {
+            "positive": 0.43,
+            "neutral": 0.04,
+            "negative": 0.53
+        },
+        "sentences": [
+            {
+                "sentiment": "negative",
+                "confidenceScores": {
+                    "positive": 0.0,
+                    "neutral": 0.01,
+                    "negative": 0.99
+                },
+                "offset": 0,
+                "length": 40,
+                "text": "The food and service were unacceptable. "
+            },
+            {
+                "sentiment": "positive",
+                "confidenceScores": {
+                    "positive": 0.86,
+                    "neutral": 0.08,
+                    "negative": 0.07
+                },
+                "offset": 40,
+                "length": 32,
+                "text": "The concierge was nice, however."
+            }
+        ],
+        "warnings": []
+    }
+    ```
+
+1. If you want to see how the endpoint can expand its classification to key words in it evaluation, change **opinionMining** to **True** and execute the call again.
+
+    ```JSON
+    "opinionMining": "True"
+    ```
 
 ### Language detection
 
 ```SQL
 declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"XXXX"}';
+declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
 declare @payload nvarchar(max) = N'{
     "kind": "LanguageDetection",
     "parameters": {
