@@ -613,37 +613,42 @@ This prebuilt capability disambiguates the identity of an entity found in text b
 
 1. Copy the following SQL and paste it into the SQL query editor.
 
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
-declare @payload nvarchar(max) = N'{
-    "kind": "EntityLinking",
-    "parameters": {
-        "modelVersion": "latest"
-    },
-    "analysisInput":{
-        "documents":[
-            {
-                "id":"1",
-                "language":"en",
-                "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975."
-            }
-        ]
-    }
-}';
+    ```SQL
+    declare @message nvarchar(max);
+    SET @message = (SELECT [Description]
+        FROM [SalesLT].[ProductDescription]
+        WHERE ProductDescriptionID = 168);
 
-declare @ret int, @response nvarchar(max);
+    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
+    declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
+    declare @payload nvarchar(max) = N'{
+        "kind": "EntityLinking",
+        "parameters": {
+            "modelVersion": "latest"
+        },
+        "analysisInput":{
+            "documents":[
+                {
+                    "id":"1",
+                    "language":"en",
+                    "text": " ' + @message + '"
+                }
+            ]
+        }
+    }';
 
-exec @ret = sp_invoke_external_rest_endpoint 
-	@url = @url,
-	@method = 'POST',
-	@headers = @headers,
-	@payload = @payload,
-    @timeout = 230,
-	@response = @response output;
+    declare @ret int, @response nvarchar(max);
 
-select @ret as ReturnCode, @response as Response;
-```
+    exec @ret = sp_invoke_external_rest_endpoint 
+        @url = @url,
+        @method = 'POST',
+        @headers = @headers,
+        @payload = @payload,
+        @timeout = 230,
+        @response = @response output;
+
+    select @ret as ReturnCode, @response as Response;
+    ```
 
 1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity.
 
@@ -653,22 +658,22 @@ select @ret as ReturnCode, @response as Response;
 
     ```JSON
     "entities": [
-    {
-        "bingId": "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85",
-        "name": "Microsoft",
-        "matches": [
-            {
-                "text": "Microsoft",
-                "offset": 0,
-                "length": 9,
-                "confidenceScore": 0.48
-            }
-        ],
-        "language": "en",
-        "id": "Microsoft",
-        "url": "https://en.wikipedia.org/wiki/Microsoft",
-        "dataSource": "Wikipedia"
-    }...
+        {
+            "bingId": "75ea1e02-58a4-a45f-232d-e7a729d644a6",
+            "name": "Vehicle frame",
+            "matches": [
+                {
+                    "text": "Frame",
+                    "offset": 100,
+                    "length": 5,
+                    "confidenceScore": 0.04
+                }
+            ],
+            "language": "en",
+            "id": "Vehicle frame",
+            "url": "https://en.wikipedia.org/wiki/Vehicle_frame",
+            "dataSource": "Wikipedia"
+        }
     ```
 
 <details>
