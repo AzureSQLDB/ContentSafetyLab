@@ -2,7 +2,7 @@
 
 # Create and Connect to an Azure SQL Database
 
-The next section of the workshop will be using an Azure SQL Database. To move our development environment into the cloud, all that is needed to be done is use SQL Database Projects and point it at an Azure SQL Database. The deploy feature will then create the objects in the selected cloud database just as it did with the local SQL Server database in the code space.
+The next section of the workshop will be creating and connecting to an Azure SQL Database.
 
 ## Azure SQL Database create and connect workshop tasks
 
