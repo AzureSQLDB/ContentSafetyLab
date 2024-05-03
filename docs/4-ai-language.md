@@ -4,15 +4,31 @@
 
 ![A picture of the AI Language logo](./media/ch4/lang1.png)
 
-## External REST Endpoint Invocation
+## Azure AI Language Service
 
-Azure SQL Database External REST Endpoint Invocation provides the ability to call REST endpoints from other Azure services such as OpenAI, communications, Azure Functions, PowerBI and more. Common use cases for developers to use External REST Endpoint Invocation are:
+Azure AI Language is a cloud-based service that provides Natural Language Processing (NLP) features for understanding and analyzing text. Use this service to help build intelligent applications using the web-based Language Studio, REST APIs, and client libraries.
 
-* Ability to push business logic out of the database and into Azure Functions
-* Pull/push data to/from external sources (including Azure Blob Storage) for ETL or derived data stores
-* Participate in event based architectures with Azure Event Hub or Kafka
+### Available features
 
-External REST Endpoint Invocation can be called in an Azure SQL Database using the sp_invoke_external_rest_endpoint stored procedure. The following exercises and examples will guide you through calling various Azure Services and seeing how you can integrate REST into your applications and database development implementations.
+Language Studio enables you to use the below service features without needing to write code.
+
+| AI Language Feature        | Description    |
+| -------------------------- | ------------- |
+| Named Entity Recognition (NER) | Named entity recognition is a preconfigured feature that categorizes entities (words or phrases) in unstructured text across several predefined category groups. For example: people, events, places, dates, and more.|
+| Personally identifying (PII) and health (PHI) information detection | PII detection is a preconfigured feature that identifies, categorizes, and redacts sensitive information in both unstructured text documents, and conversation transcripts. For example: phone numbers, email addresses, forms of identification, and more.|
+| Language detection | Language detection is a preconfigured feature that can detect the language a document is written in, and returns a language code for a wide range of languages, variants, dialects, and some regional/cultural languages.|
+| Sentiment Analysis and opinion mining | Sentiment analysis and opinion mining are preconfigured features that help you find out what people think of your brand or topic by mining text for clues about positive or negative sentiment, and can associate them with specific aspects of the text.|
+| Summarization | Summarization is a preconfigured feature that uses extractive text summarization to produce a summary of documents and conversation transcriptions. It extracts sentences that collectively represent the most important or relevant information within the original content.|
+| Key phrase extraction | Key phrase extraction is a preconfigured feature that evaluates and returns the main concepts in unstructured text, and returns them as a list.|
+| Entity linking | Entity linking is a preconfigured feature that disambiguates the identity of entities (words or phrases) found in unstructured text and returns links to Wikipedia.|
+| Text analytics for health | Text analytics for health is a preconfigured feature that extracts and labels relevant medical information from unstructured texts such as doctor's notes, discharge summaries, clinical documents, and electronic health records.|
+| Custom text classification | Custom text classification enables you to build custom AI models to classify unstructured text documents into custom classes you define.|
+| Custom Named Entity Recognition (Custom NER) | Custom NER enables you to build custom AI models to extract custom entity categories (labels for words or phrases), using unstructured text that you provide.|
+| Conversational language understanding | Conversational language understanding (CLU) enables users to build custom natural language understanding models to predict the overall intention of an incoming utterance and extract important information from it.|
+| Orchestration workflow | Orchestration workflow is a custom feature that enables you to connect Conversational Language Understanding (CLU), question answering, and LUIS applications.|
+| Question answering | Question answering is a custom feature that finds the most appropriate answer for inputs from your users, and is commonly used to build conversational client applications, such as social media applications, chat bots, and speech-enabled desktop applications.|
+| Custom text analytics for health | Custom text analytics for health is a custom feature that extract healthcare specific entities from unstructured text, using a model you create.|
+**Table 1:** Azure AI Language Feature
 
 # Getting started with REST in the Azure SQL Database
 
