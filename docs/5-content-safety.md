@@ -217,9 +217,21 @@ select @ret as ReturnCode, @response as Response;
     }
 ```
 
+## Extend your knowledge
+
+### JSON, Azure SQL, and AI Language
+
+### Create a procedure
+
+### Using Managed Identity
+
+
+
+
+
+
+
 ### Spoiler Alert
-
-
 
 <details>
   <summary>stuff with *mark* **down** in `summary` doesn't work any more, use HTML <i>italics</i> and <b>bold</b> instead in <code>&lt;summary&gt;</code> (<i>click to expand</i>)</summary>
