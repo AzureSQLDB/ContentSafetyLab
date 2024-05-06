@@ -138,6 +138,94 @@ FROM OPENJSON(@response,'$.result.results.documents') AS D
 
 </details>
 
+What about pulling out multiple values? We see the entity values in the message:
+
+```JSON
+    "entities": [
+        {
+            "text": "abcdef@abcd.com",
+            "category": "Email",
+            "offset": 0,
+            "length": 15,
+            "confidenceScore": 0.8
+        }...
+```
+
+Can we use the JSON functions to pull them all out and display as a result set? We can use CROSS APPLY with OPENJSON to get the entities array as a result set:
+
+```SQL
+SELECT A.[value]
+FROM OPENJSON(@response,'$.result.results.documents') AS D
+CROSS APPLY OPENJSON([value]) AS A 
+where A.[key] = 'entities'
+```
+
+which gives us:
+
+```JSON
+[
+    {
+        "text": "abcdef@abcd.com",
+        "category": "Email",
+        "offset": 0,
+        "length": 15,
+        "confidenceScore": 0.8
+    },
+    {
+        "text": "6657789887",
+        "category": "EUTaxIdentificationNumber",
+        "offset": 37,
+        "length": 10,
+        "confidenceScore": 0.93
+    },
+    {
+        "text": "255.255.255.255",
+        "category": "IPAddress",
+        "offset": 60,
+        "length": 15,
+        "confidenceScore": 0.8
+    }...
+```
+Next, we need to select the values in this array. We can use the above statement as a table we want to select with by nesting it with OPENJSON:
+
+```SQL
+select *
+from OPENJSON(
+(
+    SELECT A.[value]
+FROM OPENJSON(@response,'$.result.results.documents') AS D
+CROSS APPLY OPENJSON([value]
+) AS A 
+where A.[key] = 'entities'
+), '$') AS B
+```
+
+Close, but now we need to get the individual values out for text, category, and confidenceScore. Using what you learned in the previous example with JSON_VALUE, can you write this SQL query?
+
+<details>
+    <summary>(<i>Click for the answer</i>)</summary>
+    <!-- have to be followed by an empty line! -->
+
+Using the JSON_VALUE function, we can extract the values by using the path:
+
+```SQL
+SELECT JSON_VALUE(B.[value],'$.category') as "PII Category",
+       JSON_VALUE(B.[value],'$.text') as "PII Value",
+       CONVERT(FLOAT,JSON_VALUE(B.[value],'$.confidenceScore'))*100 as "Confidence Score"
+ FROM OPENJSON(
+(
+     SELECT A.[value]
+       FROM OPENJSON(@response,'$.result.results.documents') AS D
+CROSS APPLY OPENJSON([value]
+) AS A 
+WHERE A.[key] = 'entities'
+), '$') AS B
+```
+
+![A picture of the result set for the JSON query ](./media/ch6/expand1.png)
+
+</details>
+
 ### Create a procedure
 
 ### Using Managed Identity
