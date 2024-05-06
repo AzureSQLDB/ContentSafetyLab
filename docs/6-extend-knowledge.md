@@ -1,12 +1,10 @@
 # Extend your knowledge
 
-## Title
-
-### JSON, Azure SQL, and AI Language
+## JSON, Azure SQL, and AI Language
 
 In all the example REST calls, we looked at the response message as a JSON document. What if this response was part of a larger process where we only wanted key pieces of information and not the entire document? We can use the built in JSON functions of the Azure SQL Database to do just that.
 
-#### Available JSON Functions
+### Available JSON Functions
 
 T-SQL supports various functions and operators that can be used to work with JSON documents in the Azure SQL database. The available functions are:
 
@@ -25,6 +23,7 @@ The available operators are:
 1. **[FOR JSON](https://learn.microsoft.com/sql/relational-databases/json/how-for-json-converts-sql-server-data-types-to-json-data-types-sql-server)**: Converts SQL Server data types to JSON types.
 1. **[OPENJSON](https://learn.microsoft.com/sql/relational-databases/json/convert-json-data-to-rows-and-columns-with-openjson-sql-server)**: Converts JSON text into a set of rows and columns.
 
+### Extracting values using JSON Functions
 
 Let's start with the first REST call made, the PII detection and redaction endpoint:
 
