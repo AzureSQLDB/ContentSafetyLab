@@ -676,6 +676,11 @@ This prebuilt capability disambiguates the identity of an entity found in text b
         }
     ```
 
+## JSON, Azure SQL, and AI Language
+
+
+
+
 <details>
     <summary>(<i>click to for the answer</i>)</summary>
     <!-- have to be followed by an empty line! -->
