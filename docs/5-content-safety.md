@@ -89,7 +89,6 @@ exec @ret = sp_invoke_external_rest_endpoint
 	@headers = @headers,
 	@payload = @payload,
     @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
 	@response = @response output;
 
 select @ret as ReturnCode, @response as Response;
@@ -128,7 +127,6 @@ exec @ret = sp_invoke_external_rest_endpoint
 	@headers = @headers,
 	@payload = @payload,
     @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
 	@response = @response output;
 
 select @ret as ReturnCode, @response as Response;
@@ -164,7 +162,6 @@ exec @ret = sp_invoke_external_rest_endpoint
 	@headers = @headers,
 	@payload = @payload,
     @timeout = 230,
---	@credential = [https://motherbrain.cognitiveservices.azure.com],
 	@response = @response output;
 
 select @ret as ReturnCode, @response as Response;
