@@ -16,6 +16,8 @@ The following are a few scenarios in which a software developer or team would re
 * Enterprise media companies that implement centralized moderation for their content.
 * K-12 education solution providers filtering out content that is inappropriate for students and educators.
 
+### Available features
+
 The following are the features available with AI Content Safety:
 
 | AI Content Safety Feature  | Description    |
