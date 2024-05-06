@@ -4,7 +4,7 @@
 
 ### JSON, Azure SQL, and AI Language
 
-In all the above REST calls, we looked at the response message as a JSON document. What if this response was part of a larger process where we only wanted key pieces of information and not the entire document? We can use the built in JSON functions of the Azure SQL Database to do just that.
+In all the example REST calls, we looked at the response message as a JSON document. What if this response was part of a larger process where we only wanted key pieces of information and not the entire document? We can use the built in JSON functions of the Azure SQL Database to do just that.
 
 #### Available JSON Functions
 
