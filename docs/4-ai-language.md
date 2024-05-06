@@ -1,10 +1,10 @@
 ![A picture of the Microsoft Logo](./media/graphics/microsoftlogo.png)
 
-# Using the Azure AI Language Service
+# Using Azure AI Language
 
 ![A picture of the AI Language logo](./media/ch4/lang1.png)
 
-## Azure AI Language Service
+## Azure AI Language
 
 Azure AI Language is a cloud-based service that provides Natural Language Processing (NLP) features for understanding and analyzing text. Use this service to help build intelligent applications using the web-based Language Studio, REST APIs, and client libraries.
 
@@ -31,9 +31,9 @@ Language Studio enables you to use the below service features without needing to
 
 **Table 1:** Azure AI Language Features
 
-# Getting started with Azure AI Language Service and REST in the Azure SQL Database
+# Getting started with Azure AI Language and REST in the Azure SQL Database
 
-In this section, you will use Azure AI Language Service with the External REST Endpoint Invocation (EREI) feature of the database to call various endpoints to see how data in the database can be paired with AI features.
+In this section, you will use Azure AI Language with the External REST Endpoint Invocation (EREI) feature of the database to call various endpoints to see how data in the database can be paired with AI features.
 
 ## PII and Redaction
 
