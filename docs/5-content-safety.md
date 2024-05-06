@@ -16,7 +16,8 @@ The following are a few scenarios in which a software developer or team would re
 * Enterprise media companies that implement centralized moderation for their content.
 * K-12 education solution providers filtering out content that is inappropriate for students and educators.
 
-The following are the services available with AI Content Safety:
+The following are the features available with AI Content Safety:
+
 | AI Content Safety Feature  | Description    |
 | -------------------------- | ------------- |
 |Analyze text API | Scans text for sexual content, violence, hate, and self harm with multi-severity levels.|
