@@ -1,4 +1,16 @@
-# Content Safety
+![A picture of the Microsoft Logo](./media/graphics/microsoftlogo.png)
+
+# Using Azure AI Content Safety
+
+![A picture of the AI Language logo](./media/ch5/contentSafety.png)
+
+## Azure AI Content Safety
+
+Azure AI Content Safety detects harmful user-generated and AI-generated content in applications and services. Azure AI Content Safety includes text and image APIs that allow you to detect material that is harmful.
+
+# Getting started with Azure AI Content Safety and REST in the Azure SQL Database
+
+In this section, you will use Azure AI Content Safety with the External REST Endpoint Invocation (EREI) feature of the database to call various endpoints to see how data in the database can be paired with AI features.
 
 ### Moderate text content
 
