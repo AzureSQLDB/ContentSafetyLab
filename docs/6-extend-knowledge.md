@@ -113,6 +113,8 @@ The result is a more concise JSON document but more than we need.
 
 We can use the JSON_VALUE ( expression , path )  function to take just the redactedText value.
 
+### Try It Out!
+
 Use the JSON_VALUE ( expression , path ) with the following statement to just get the redactedText value
 
 ```SQL
@@ -199,7 +201,11 @@ where A.[key] = 'entities'
 ), '$') AS B
 ```
 
-Close, but now we need to get the individual values out for text, category, and confidenceScore. Using what you learned in the previous example with JSON_VALUE, can you write this SQL query?
+Close, but now we need to get the individual values out for text, category, and confidenceScore. 
+
+### Try It Out!
+
+Using what you learned in the previous example with JSON_VALUE, can you write this SQL query?
 
 <details>
     <summary>(<i>Click for the answer</i>)</summary>
