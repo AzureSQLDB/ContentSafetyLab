@@ -8,6 +8,25 @@
 
 Azure AI Content Safety detects harmful user-generated and AI-generated content in applications and services. Azure AI Content Safety includes text and image APIs that allow you to detect material that is harmful.
 
+The following are a few scenarios in which a software developer or team would require a content moderation service:
+
+* Online marketplaces that moderate product catalogs and other user-generated content.
+* Gaming companies that moderate user-generated game artifacts and chat rooms.
+* Social messaging platforms that moderate images and text added by their users.
+* Enterprise media companies that implement centralized moderation for their content.
+* K-12 education solution providers filtering out content that is inappropriate for students and educators.
+
+The following are the services available with AI Content Safety:
+| AI Content Safety Feature  | Description    |
+| -------------------------- | ------------- |
+|Analyze text API | Scans text for sexual content, violence, hate, and self harm with multi-severity levels.|
+|Analyze image API | Scans images for sexual content, violence, hate, and self harm with multi-severity levels.|
+|Prompt Shields (preview) | Scans text for the risk of a User input attack on a Large Language Model.|
+|Groundedness detection (preview) | Detects whether the text responses of large language models (LLMs) are grounded in the source materials provided by the users.|
+|Protected material text detection (preview) | Scans AI-generated text for known text content (for example, song lyrics, articles, recipes, selected web content).|
+
+**Table 1:** Azure AI Content Safety Features
+
 # Getting started with Azure AI Content Safety and REST in the Azure SQL Database
 
 In this section, you will use Azure AI Content Safety with the External REST Endpoint Invocation (EREI) feature of the database to call various endpoints to see how data in the database can be paired with AI features.
