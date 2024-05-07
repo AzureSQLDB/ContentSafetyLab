@@ -233,4 +233,42 @@ WHERE A.[key] = 'entities'
 
 ### Create a procedure
 
-### Using Managed Identity
+Can we make a stored procedure that takes in say the authentication key and content we want to send to a set of endpoints? Maybe a paremeter that sets the endpoint we want to use?
+
+If we look at the AI Content Safety URLs, they start with "https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:". The URL also ends with the API version "?api-version=2024-02-15-preview". What is different is what is after text:. The 3 options we can use that have a similar payload are analyze, detectJailbreak, and detectProtectedMaterial.
+
+With that said, it seems we have 3 parameters for the stored procedure: Auth key, operation, and message.
+
+### Try It Out!
+
+Can you create a stored procedure that takes in 3 parameters and calls the 3 AI Content Safety REST endpoints?
+(Have the output just be the return JSON message)
+
+<details>
+    <summary>(<i>Click for the answer</i>)</summary>
+    <!-- have to be followed by an empty line! -->
+
+```SQL
+CREATE PROCEDURE aiContentSafety @operation nvarchar(100), @safetykey nvarchar(100), @message nvarchar(max)
+AS
+declare @url nvarchar(4000) = N'https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:' + operation + '?api-version=2023-10-01';
+declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"'+ @safetykey +'"}';
+declare @payload nvarchar(max) = N'{
+"text": "'+ @message +'"
+}';
+
+declare @ret int, @response nvarchar(max);
+exec @ret = sp_invoke_external_rest_endpoint
+@url = @url,
+@method = 'POST',
+@headers = @headers,
+@payload = @payload,
+@timeout = 230,
+@response = @response output;
+
+select @ret as ReturnCode, @response as Response;
+
+GO
+```
+
+</details>
