@@ -233,7 +233,7 @@ WHERE A.[key] = 'entities'
 
 ## Create a stored procedure
 
-Can we make a stored procedure that takes in say the authentication key and content we want to send to a set of endpoints? Maybe a paremeter that sets the endpoint we want to use?
+Can we make a stored procedure that takes in say the authentication key and content we want to send to a set of endpoints? Maybe a parameter that sets the endpoint we want to use?
 
 If we look at the AI Content Safety URLs, they start with "https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:". The URL also ends with the API version "?api-version=2024-02-15-preview". What is different is what is after text:. The 3 options we can use that have a similar payload are analyze, detectJailbreak, and detectProtectedMaterial.
 

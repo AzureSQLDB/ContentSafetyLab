@@ -401,7 +401,7 @@ Azure AI Language Sentiment Analysis feature provides sentiment labels (such as 
 
 1. Execute the SQL statement with the run button.
 
-1. View the return message. You can see that the overall message was mixed and it classified one positive and one negitive sentence in the text.
+1. View the return message. You can see that the overall message was mixed and it classified one positive and one negative sentence in the text.
 
     ```JSON
     "documents": [
@@ -605,7 +605,7 @@ This prebuilt capability uses Named Entity Recognition (NER) to identify entitie
     ],
     ```
 
-1. If you want to expriment with this, you can change the **ProductDescriptionID** in the SQL statement that sets the message. Some values you can use are 661, 1062, or 647.
+1. If you want to experiment with this, you can change the **ProductDescriptionID** in the SQL statement that sets the message. Some values you can use are 661, 1062, or 647.
 
 ### Entity Linking
 
@@ -675,36 +675,3 @@ This prebuilt capability disambiguates the identity of an entity found in text b
             "dataSource": "Wikipedia"
         }
     ```
-
-
-<details>
-    <summary>(<i>click to for the answer</i>)</summary>
-    <!-- have to be followed by an empty line! -->
-
-Something about the answer here
-
-```SQL
-select * from answer with
-JASON_VALUES(xxxxxx)
-```
-</details>
-
-
-SELECT A.[value] as "Redacted Text"
-FROM OPENJSON(@response,'$.result.results.documents') AS D
-CROSS APPLY OPENJSON([value]) as A
-where A.[key] = 'redactedText'
-
-select JSON_VALUE(B.[value],'$.category') as "PII Category",
-JSON_VALUE(B.[value],'$.text') as "PII Value",
-CONVERT(FLOAT,JSON_VALUE(B.[value],'$.confidenceScore'))*100 as "Confidence Score"
-from OPENJSON(
-(
-    SELECT A.[value] --D.[key] as "PII Type", JSON_VALUE(A.[value],'$.Text') as "PII Value"
-FROM OPENJSON(@response,'$.result.results.documents') AS D
-CROSS APPLY OPENJSON([value]
-) AS A 
-where A.[key] = 'entities'
-), '$') AS B
-
-GO

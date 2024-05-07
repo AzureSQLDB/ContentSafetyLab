@@ -86,9 +86,9 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of clicking on the sample option of the Use existing data toggle](./media/ch2/deploy11d.png)
 
-    and in the pop-up doalog, select **OK** for the question **"Do you want to continue"**.
+    and in the pop-up dialog, select **OK** for the question **"Do you want to continue"**.
 
-    ![A picture of selecting OK for the question Do you want to continue in the pop-up doalog](./media/ch2/deploy11e.png)
+    ![A picture of selecting OK for the question Do you want to continue in the pop-up dialog](./media/ch2/deploy11e.png)
 
 1. On the bottom of the page in the lower left, click the **Review + create** blue button.
 
@@ -136,11 +136,11 @@ The next section of the workshop you will be creating and connecting to an Azure
 
 #### Option 1: Using the Query Editor in the Azure Portal
 
-1. Using the menu on the left side, open the menu items under **Settings** if not alreay opened. Then select **SQL Databases** by clicking on it.
+1. Using the menu on the left side, open the menu items under **Settings** if not already opened. Then select **SQL Databases** by clicking on it.
 
     ![A picture of clicking the SQL Databases option under settings](./media/ch2/deploy2a.png)
 
-1. Next, on the main page, find the FreeDB you created and click on it naviage to the database details page.
+1. Next, on the main page, find the FreeDB you created and click on it navigate to the database details page.
 
     ![A picture of clicking the FreeDB SQL Databases](./media/ch2/deploy2b.png)
 
