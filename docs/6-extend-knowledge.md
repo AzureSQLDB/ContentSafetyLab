@@ -231,7 +231,7 @@ WHERE A.[key] = 'entities'
 
 </details>
 
-### Create a procedure
+## Create a stored procedure
 
 Can we make a stored procedure that takes in say the authentication key and content we want to send to a set of endpoints? Maybe a paremeter that sets the endpoint we want to use?
 
