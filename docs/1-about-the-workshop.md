@@ -12,6 +12,6 @@ The lab contains 5 chapters:
 * Using the Azure AI Content Safety endpoints
 * Expanding your knowledge
 
-The last chapter contains excersizes you can work through on expanding on the REST endpoints. It covers creating stored procedures that encapsulate the REST call as well as using the native JSON functions of the Azure SQL Database to extract information from the response messages.
+The last chapter contains exercises you can work through on expanding on the REST endpoints. It covers creating stored procedures that encapsulate the REST call as well as using the native JSON functions of the Azure SQL Database to extract information from the response messages.
 
 To get started with chapter 2, click [here](./2-create-azure-SQL-database.md)
