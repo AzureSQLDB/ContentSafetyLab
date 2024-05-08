@@ -78,7 +78,7 @@ Can we add to this T-SQL block to pull out just the redacted text? Taking a look
                     },
 ```
 
-We can replace the ```SQL select @ret as ReturnCode, @response as Response;``` query with a JSON function to extract pieces of this JSON document.
+We can replace the `SQL select @ret as ReturnCode, @response as Response;` query with a JSON function to extract pieces of this JSON document.
 
 
 Replace it with the following SQL and rerun the REST call:
