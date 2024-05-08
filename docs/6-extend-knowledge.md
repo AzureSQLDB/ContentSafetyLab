@@ -251,7 +251,7 @@ Can you create a stored procedure that takes in 3 parameters and calls the 3 AI 
 ```SQL
 CREATE PROCEDURE aiContentSafety @operation nvarchar(100), @safetykey nvarchar(100), @message nvarchar(max)
 AS
-declare @url nvarchar(4000) = N'https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:' + operation + '?api-version=2023-10-01';
+declare @url nvarchar(4000) = N'https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:' + @operation + '?api-version=2024-02-15-preview';
 declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"'+ @safetykey +'"}';
 declare @payload nvarchar(max) = N'{
 "text": "'+ @message +'"
@@ -267,6 +267,109 @@ exec @ret = sp_invoke_external_rest_endpoint
 @response = @response output;
 
 select @ret as ReturnCode, @response as Response;
+
+GO
+```
+
+</details>
+
+## Putting it all together
+
+Now that you have some experience using the JSON functions and have created a stored procedure, can you combine the 2 and extract just key pieces of information from the responce message from an AI Content Safety call? The analyze, detectJailbreak, and detectProtectedMaterial have similar payloads so we will need some logic to decide how to extract the key information. The payloads are as follows:
+
+**analyze**
+
+```JSON
+"result": {
+    "blocklistsMatch": [],
+    "categoriesAnalysis": [
+        {
+            "category": "Hate",
+            "severity": 0
+        },
+        {
+            "category": "SelfHarm",
+            "severity": 0
+        },
+        {
+            "category": "Sexual",
+            "severity": 0
+        },
+        {
+            "category": "Violence",
+            "severity": 4
+        }
+    ]
+}
+```
+
+**detectJailbreak**
+
+```JSON
+"result": {
+    "jailbreakAnalysis": {
+        "detected": true
+    }
+}
+```
+
+**detectProtectedMaterial**
+
+```JSON
+"result": {
+    "protectedMaterialAnalysis": {
+        "detected": true
+    }
+}
+```
+
+Looking at the payloads, detectJailbreak and detectProtectedMaterial are very similar so is there a way to use a JSON function to extract just detected without having to specify jailbreakAnalysis or protectedMaterialAnalysis? Can OPENJSON work? Let's set some requirements for detectJailbreak and detectProtectedMaterial. When using these 2 endpoints, let's look at taking the key value (detectJailbreak and detectProtectedMaterial) as content_type and the detected value (true/false) as detected.
+
+Here is a hint. Start by using the following as your T-SQL query with detectJailbreak and detectProtectedMaterial:
+
+```SQL
+SELECT *
+FROM OPENJSON(@response,'$.result') AS D
+```
+
+After this, can you get the values for categoriesAnalysis into a table format when analyze is passed into the procedure?
+
+And finally, can you add logic to use one T-SQL statement over the other by looking at the operation parameter?
+
+### Try It Out!
+
+Can you add logic and JSON functions to the stored procedure to extract information based on operation?
+
+<details>
+    <summary>(<i>Click for the answer</i>)</summary>
+    <!-- have to be followed by an empty line! -->
+
+```SQL
+CREATE PROCEDURE aiContentSafety @operation nvarchar(100), @safetykey nvarchar(100), @message nvarchar(max)
+AS
+declare @url nvarchar(4000) = N'https://contentsafetyatbuild2024.cognitiveservices.azure.com/contentsafety/text:' + @operation + '?api-version=2024-02-15-preview';
+declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"'+ @safetykey +'"}';
+declare @payload nvarchar(max) = N'{
+"text": "'+ @message +'"
+}';
+
+declare @ret int, @response nvarchar(max);
+exec @ret = sp_invoke_external_rest_endpoint
+@url = @url,
+@method = 'POST',
+@headers = @headers,
+@payload = @payload,
+@timeout = 230,
+@response = @response output;
+
+IF (@operation = 'detectJailbreak' or @operation = 'detectProtectedMaterial')
+
+    SELECT D.[key] as content_type, JSON_VALUE(D.[value],'$.detected') as detected
+    FROM OPENJSON(@response,'$.result') AS D
+ELSE
+    SELECT JSON_VALUE(D.[value],'$.category') as "Category",
+    JSON_VALUE(D.[value],'$.severity') as "Severity"
+    FROM OPENJSON(@response,'$.result.categoriesAnalysis') AS D
 
 GO
 ```
