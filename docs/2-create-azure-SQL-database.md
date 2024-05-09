@@ -142,9 +142,9 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of clicking the Azure SQL Databases option under settings](./media/ch2/deploy2a.png)
 
-1. Next, on the main page, find the FreeDB you created and click on it navigate to the database details page.
+1. Next, on the main page, find the freeDB you created and click on it navigate to the database details page.
 
-    ![A picture of clicking the FreeDB SQL Databases](./media/ch2/deploy2b.png)
+    ![A picture of clicking the freeDB SQL Databases](./media/ch2/deploy2b.png)
 
 1. Using the menu options on the left side, find and click on **Query editor (preview)**.
 
@@ -168,6 +168,10 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of downloading or launching Azure Data Studio from the Azure portal](./media/ch2/deploy3b.png)
 
+1. When Azure Data Studio opens, you may be presented with a dialog window asking **"Are you sure you want to connect?"**. Click the **Open** button.
+
+    ![A picture of click the Open button in Azure Data Studio connection dialog box](./media/ch2/deploy3b1.png)
+
 1. The link will launch Azure Data Studio and pre-create a database connection profile with the database details for the Azure SQL Database that was just created. Start by changing the **Authentication Type** to **Microsoft Entra ID**.
 
     ![A picture of changing the Authentication Type to Microsoft Entra ID](./media/ch2/deploy3c.png)
@@ -176,9 +180,17 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of selecting your email address for the account field](./media/ch2/deploy3d.png)
 
-1. If no account has been set/logged in, select the **Add an account** option and authenticate via the Azure portal.
+1. If no account has been set/logged in, select the **Add an account** option
 
     ![A picture of selecting the Add an account option and authenticate via the Azure portal](./media/ch2/deploy3e.png)
+
+    and authenticate via the Azure portal.
+
+    ![A picture of authenticating via the Azure portal](./media/ch2/deploy3e1.png)
+
+    Once authenticated, you can close the browser tab and return to Azure Data Studio.
+
+    ![A picture of a successful authentication via the Azure portal](./media/ch2/deploy3e2.png)
 
 1. Once connected to the database, right click on the connection name in the connection navigator on the left side and choose **New Query**.
 
