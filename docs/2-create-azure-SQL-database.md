@@ -158,39 +158,57 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of the query editor](./media/ch2/deploy2e.png)
 
-#### Option 2: Using Azure Data Studio
+#### Option 2: Using Visual Studio Code
 
-1. Azure Data Studio is another option for working with the database with a dedicated client tool. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open Azure Data Studio** button.
+1. Visual Studio Code is another option for working with the database with a dedicated client tool. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open in Visual Studio Code** button.
 
-    ![A picture of clicking on the blue Open Azure Data Studio button](./media/ch2/deploy3a.png)
+    ![A picture of clicking on the blue Open in Visual Studio Code button](./media/ch2/deploy3a.png)
 
-1. On the following page, if Azure Data Studio is not installed, click on the blue **Download Azure Data Studio** button to start that process. If it is already installed or was just installed, click on the **Launch it now** link.
+1. On the following page, if Visual Studio Code is not installed, click on the blue **Download Visual Studio Code** button to start that process. If it is already installed or was just installed, click on the **Launch it now** link.
 
-    ![A picture of downloading or launching Azure Data Studio from the Azure portal](./media/ch2/deploy3b.png)
+    ![A picture of downloading or launching Visual Studio Code from the Azure portal](./media/ch2/deploy3b.png)
 
-1. When Azure Data Studio opens, you may be presented with a dialog window asking **"Are you sure you want to connect?"**. Click the **Open** button.
+1. When Visual Studio Code opens, click the SQL Extension on the left side.
 
-    ![A picture of click the Open button in Azure Data Studio connection dialog box](./media/ch2/deploy3b1.png)
+    ![A picture of click the Open button in Visual Studio Code connection dialog box](./media/ch2/deploy3b2.png)
 
-1. The link will launch Azure Data Studio and pre-create a database connection profile with the database details for the Azure SQL Database that was just created. Start by changing the **Authentication Type** to **Microsoft Entra ID**.
+1. Next, click **Add Connection** in the SQL Extension.
 
-    ![A picture of changing the Authentication Type to Microsoft Entra ID](./media/ch2/deploy3c.png)
+    ![A picture of clicking Add Connection in the SQL Extension](./media/ch2/deploy3b3.png)
 
-1. For the **Account** field, if you have been authenticated previously, an email address will be present. Select your email address for the account field. Once the profile is filled out, click the blue **Connect** button.
+1. On the top of Visual Studio Code, a dialog box will appear asking for a **Server Name or ADO.NET connection string**.
 
-    ![A picture of selecting your email address for the account field](./media/ch2/deploy3d.png)
+    ![A picture of a dialog box will appearing asking for a Server Name or ADO.NET connection string](./media/ch2/deploy3b4.png)
 
-1. If no account has been set/logged in, select the **Add an account** option
+    Enter the **server name** of your Free Azure SQL Database instance. You can find and copy this value on the Azure SQL Database details page back in the Azure Portal.
 
-    ![A picture of selecting the Add an account option and authenticate via the Azure portal](./media/ch2/deploy3e.png)
+    ![A picture of a dialog box will appearing asking for a Server Name or ADO.NET connection string](./media/ch2/deploy3b5.png)
 
-    and authenticate via the Azure portal.
+    then press enter/return in the dialog box.
+
+1. The next dialog box asks for the **Database Name**. Enter **freeDB** (the name if the database you created) and press enter/return.
+
+    ![A picture of entering freeDB in the dialog box and pressing enter/return](./media/ch2/deploy3b6.png)
+
+1. For the Authentication type dialog box, choose **Microsoft Entra Id**.
+
+    ![A picture of chooseing Microsoft Entra Id ror the Authentication type dialog box](./media/ch2/deploy3b7.png)
+
+1. In the following dialog box, you are asked to **Choose a Microsoft Entra account**. Choose **Add a Microsoft Entra account...**. 
+
+    ![A picture of selecting the Add a Microsoft Entra account](./media/ch2/deploy3e.png)
+
+    and authenticate via Edge and the Azure portal.
 
     ![A picture of authenticating via the Azure portal](./media/ch2/deploy3e1.png)
 
-    Once authenticated, you can close the browser tab and return to Azure Data Studio.
+    Once authenticated, you can close the browser tab and return to Visual Studio Code.
 
     ![A picture of a successful authentication via the Azure portal](./media/ch2/deploy3e2.png)
+
+1. When you return to Visual Studio Code, the last dialog box asks you to **name the connection profile**. Name it **freeDB** and press enter/return.
+
+   ![A picture of a naming the connection profile freeDB](./media/ch2/deploy3e3.png)
 
 1. Once connected to the database, right click on the connection name in the connection navigator on the left side and choose **New Query**.
 
