@@ -230,7 +230,7 @@ WHERE A.[key] = 'entities'
 ), '$') AS B
 ```
 
-![A picture of the result set for the JSON query ](./media/ch6/expand1.png)
+![A picture of the result set for the JSON query ](./media/ch7/expand1.png)
 
 </details>
 
