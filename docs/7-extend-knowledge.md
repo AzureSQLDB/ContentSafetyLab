@@ -1,3 +1,6 @@
+
+![A picture of the Microsoft Logo](./media/graphics/microsoftlogo.png)
+
 # Extend your knowledge
 
 ## JSON, Azure SQL, and AI Language
