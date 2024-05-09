@@ -25,8 +25,8 @@ Azure OpenAI Service is powered by a diverse set of models with different capabi
 
 TODO
 
-Update messages/input with Adventure Works data
-Change T-SQL format to example on bottom
+* Update messages/input with Adventure Works data
+* Add response sections and explore outputs
 
 
 ## Azure OpenAI Embeddings
@@ -104,34 +104,3 @@ The image generation API creates an image from a text prompt.
 
 1. View the return message.
 
-
-```SQL
-declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/:analyze-text?api-version=2023-04-01';
-declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
-declare @payload nvarchar(max) = N'{
-    "kind": "PiiEntityRecognition",
-    "analysisInput":
-    {
-        "documents":
-        [
-            {
-                "id":"1",
-                "language": "en",
-                "text": "abcdef@abcd.com, this is my phone is 6657789887, and my IP: 255.255.255.255 127.0.0.1 fluffybunny@bunny.net, My Addresses are 1 Microsoft Way, Redmond, WA 98052, SSN 543-55-6654, 123 zoo street chickenhouse, AZ 55664"
-            }
-        ]
-    }
-}';
-
-declare @ret int, @response nvarchar(max);
-
-exec @ret = sp_invoke_external_rest_endpoint 
-    @url = @url,
-    @method = 'POST',
-    @headers = @headers,
-    @payload = @payload,
-    @timeout = 230,
-    @response = @response output;
-
-select @ret as ReturnCode, @response as Response;
-```
