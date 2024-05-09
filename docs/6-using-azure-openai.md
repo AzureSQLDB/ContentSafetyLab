@@ -10,6 +10,7 @@ Azure OpenAI Service provides REST API access to OpenAI's powerful language mode
 
 ## Azure OpenAI Embeddings
 
+```SQL
 DECLARE @ret INT, @response NVARCHAR(MAX);
 
 EXEC @ret = sp_invoke_external_rest_endpoint
@@ -21,11 +22,12 @@ EXEC @ret = sp_invoke_external_rest_endpoint
     @response = @response OUTPUT;
 
 SELECT @ret AS ReturnCode, @response AS Response;
-
+```
 
 
 ## Azure OpenAI DALL-E 3
 
+```SQL
 DECLARE @ret INT, @response NVARCHAR(MAX);
 
 EXEC @ret = sp_invoke_external_rest_endpoint
@@ -43,3 +45,4 @@ EXEC @ret = sp_invoke_external_rest_endpoint
     @response = @response OUTPUT;
 
 SELECT @ret AS ReturnCode, @response AS Response;
+```
