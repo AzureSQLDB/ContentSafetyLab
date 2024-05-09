@@ -10,6 +10,8 @@ The next section of the workshop you will be creating and connecting to an Azure
 
 1. Ensure you have an Azure account to log into the Azure Portal. Need a free account? Sign up for one [here](https://azure.microsoft.com/en-us/free).
 
+    **NOTE: (You can skip this step if you are using a Skillable VM instance)**
+
 1. Navigate to the [Azure Portal](https://portal.azure.com/#home), and in the upper left corner, click the menu button.
 
     ![A picture of selecting the menu in the upper left corner of the Azure Portal](./media/ch2/deploy1a.png)
