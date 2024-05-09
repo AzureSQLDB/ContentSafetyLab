@@ -138,9 +138,9 @@ The next section of the workshop you will be creating and connecting to an Azure
 
 #### Option 1: Using the Query Editor in the Azure Portal
 
-1. Using the menu on the left side, open the menu items under **Settings** if not already opened. Then select **SQL Databases** by clicking on it.
+1. Using the menu on the left side, open the menu items under **Settings** if not already opened. Then select **Azure SQL Databases** by clicking on it.
 
-    ![A picture of clicking the SQL Databases option under settings](./media/ch2/deploy2a.png)
+    ![A picture of clicking the Azure SQL Databases option under settings](./media/ch2/deploy2a.png)
 
 1. Next, on the main page, find the FreeDB you created and click on it navigate to the database details page.
 
