@@ -124,7 +124,7 @@ The image generation API creates an image from a text prompt.
 
 1. Execute the SQL statement with the run button.
 
-1. View the return message. The message contains a revised prompt and a URL to the image it has created. Copy and paste the image URL into a browser to see somthing wonderful.
+1. View the return message. The message contains a revised prompt and a URL to the image it has created. Copy and paste the image URL into a browser to see something wonderful.
 
     ```JSON
     "result": {
