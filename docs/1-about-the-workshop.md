@@ -3,6 +3,8 @@
 # About the AI Language and AI Content Safety Workshop
 #### LAB331 Use Azure SQL DB and REST endpoints to enable AI content moderation
 
+![A picture of the Azure OpenAI abstract logo](./media/ch1/ch1Header.png)
+
 This lab will guide you through contacting REST endpoints for Azure AI Language, Azure OpenAI, and Azure AI Content Safety. The workshop utilizes the always free Azure SQL Database and the ability to call external REST endpoints via a system stored procedure ([sp_invoke_external_rest_endpoint](https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql?view=azuresqldb-current&tabs=request-headers)).
 
 The lab contains 6 chapters:
