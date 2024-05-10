@@ -33,8 +33,7 @@ TODO
 
 An embedding is a special format of data representation that machine learning models and algorithms can easily use. The embedding is an information dense representation of the semantic meaning of a piece of text. Each embedding is a vector of floating-point numbers, such that the distance between two embeddings in the vector space is correlated with semantic similarity between two inputs in the original format. For example, if two texts are similar, then their vector representations should also be similar.
 
-1. Copy the following SQL and paste it into the SQL query editor.
-
+1. Copy the following SQL and paste it into the SQL query editor. You can see from the T-SQL that we are going to create an embedding for a product name from data in the Azure SQL Database. The query `SELECT [Name] FROM [SalesLT].[Product] WHERE ProductID = 846` returns "**Taillights - Battery-Powered**" and will be sent to the OpenAI REST endpoint.
 
     ```SQL
     declare @url nvarchar(4000) = N'https://build2024openai.openai.azure.com/openai/deployments/build2024-embeddings/embeddings?api-version=2024-02-01';
@@ -62,13 +61,36 @@ An embedding is a special format of data representation that machine learning mo
 
 1. Execute the SQL statement with the run button.
 
-1. View the return message.
+1. View the return message. It contains the vector representation of our product name input that can now be easily consumed by machine learning models and other algorithms. It can even be stored locally in the Azure SQL Database for vector similarity searches.
+
+    ```JSON
+    "result": {
+    "object": "list",
+    "data": [
+        {
+        "object": "embedding",
+        "index": 0,
+        "embedding": [
+            -0.0023090523,
+            -0.009229573,
+            0.00032222227,
+            -0.010138597,
+            -0.01567236,
+            -0.0010989562,
+            0.010609697,
+            -0.04028898,
+            -0.0047508087,
+            -0.03452962,
+            0.01954732,
+            0.032167487,
+            ...
+    ```
 
 ## Azure OpenAI DALL-E 3
 
 The image generation API creates an image from a text prompt.
 
-1. Copy the following SQL and paste it into the SQL query editor.
+1. Copy the following SQL and paste it into the SQL query editor. Like the previous example, the query here 'SELECT [Description] FROM [SalesLT].[ProductDescription] WHERE ProductDescriptionID = 457' returns a product description "**This bike is ridden by race winners. Developed with the Adventure Works Cycles professional race team, it has a extremely light heat-treated aluminum frame, and steering that allows precision control.**" which will be sent to the DALL-E 3 text to image endpoint.
 
     ```SQL
     declare @url nvarchar(4000) = N'https://build2024openai.openai.azure.com/openai/deployments/build2024-dalle3/images/generations?api-version=2023-12-01-preview';
@@ -102,5 +124,18 @@ The image generation API creates an image from a text prompt.
 
 1. Execute the SQL statement with the run button.
 
-1. View the return message.
+1. View the return message. The message contains a revised prompt and a URL to the image it has created. Copy and paste the image URL into a browser to see somthing wonderful.
 
+    ```JSON
+    "result": {
+        "created": 1715370756,
+        "data": [
+            {
+                "revised_prompt": "Visualize a high-performance bicycle ridden by champions in professional races. This bike has been developed in partnership with the Adventure Works Cycles racing team. It boasts an extremely lightweight frame constructed from heat-treated aluminum, combined with a steering mechanism that allows for precision control. Show the bike standing alone, showcasing its design and technology.",
+                "url": "LONG_URL_HERE"
+            }
+        ]
+    }
+    ```
+
+    ![An image created by Azure OpenAI DALL-E 3](./media/ch6/generated_00.png)
