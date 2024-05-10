@@ -139,3 +139,7 @@ The image generation API creates an image from a text prompt.
     ```
 
     ![An image created by Azure OpenAI DALL-E 3](./media/ch6/generated_00.png)
+
+    1. Now you are in charge. Either select a new product description ID or try creating an image yourself! Here is some inspiration:
+
+    ![An image created by Azure OpenAI DALL-E 3](./media/ch6/image2.png)
