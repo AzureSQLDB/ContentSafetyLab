@@ -42,7 +42,11 @@ In this section, you will test the External REST Endpoint Invocation (EREI) feat
 
     ![A picture of clicking the Run button](./media/ch3/testing1.png)
 
-1. Click (or hover over in the Azure Portal Query Editor) the results to see the response message. It should look similar to the following.
+1. Click (or hover over in the Azure Portal Query Editor) the results to see the response message. 
+
+    ![A picture of hovering over the results to see the response message](./media/ch3/testing2.png)
+
+    It should look similar to the following.
 
       ```JSON
       {
@@ -63,7 +67,5 @@ In this section, you will test the External REST Endpoint Invocation (EREI) feat
           "result": "Hello from Microsoft Build 2024! The AI Language Key is XXXXXXXXX. The Content Safety Key is XXXXXXXXX"
       }
       ```
-
-    ![A picture of hovering over the results to see the response message](./media/ch3/testing2.png)
 
 1. Copy these keys because it will be used in upcoming sections of this workshop. Here they are represented here as XXXXXXXXX, but the keys presented to you will be a longer string of numbers and letters.
