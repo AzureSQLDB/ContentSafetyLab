@@ -138,31 +138,9 @@ The next section of the workshop you will be creating and connecting to an Azure
 
 ### Connect to the free Azure SQL Database
 
-#### Option 1: Using the Query Editor in the Azure Portal
+#### Using Visual Studio Code
 
-1. Using the menu on the left side, open the menu items under **Settings** if not already opened. Then select **Azure SQL Databases** by clicking on it.
-
-    ![A picture of clicking the Azure SQL Databases option under settings](./media/ch2/deploy2a.png)
-
-1. Next, on the main page, find the freeDB you created and click on it navigate to the database details page.
-
-    ![A picture of clicking the freeDB SQL Databases](./media/ch2/deploy2b.png)
-
-1. Using the menu options on the left side, find and click on **Query editor (preview)**.
-
-    ![A picture of clicking on Query editor (preview) in the left menu](./media/ch2/deploy2c.png)
-
-1. Next, click on the blue **Continue as ...** (with ... being the user you set as the database admin upon creation) in the Microsoft Entra authentication section.
-
-    ![A picture of clicking on Microsoft Entra authentication continue as user blue button](./media/ch2/deploy2d.png)
-
-1. The Query Editor will be used in the following chapters for running T-SQL code and procedures.
-
-    ![A picture of the query editor](./media/ch2/deploy2e.png)
-
-#### Option 2: Using Visual Studio Code
-
-1. Visual Studio Code is another option for working with the database with a dedicated client tool. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open in Visual Studio Code** button.
+1. Visual Studio Code will be used for working with the database. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open in Visual Studio Code** button.
 
     ![A picture of clicking on the blue Open in Visual Studio Code button](./media/ch2/deploy3a.png)
 
