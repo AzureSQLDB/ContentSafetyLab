@@ -140,7 +140,17 @@ The next section of the workshop you will be creating and connecting to an Azure
 
 #### Using Visual Studio Code
 
-1. Visual Studio Code will be used for working with the database. To use this tool, start on the main page, **Getting Started** tab for the database details. Here click on the blue **Open in Visual Studio Code** button.
+Visual Studio Code will be used for working with the database.
+
+1. Using the menu on the left side, open the menu items under **Settings** if not already opened. Then select **Azure SQL Databases** by clicking on it.
+
+    ![A picture of clicking the Azure SQL Databases option under settings](./media/ch2/deploy2a.png)
+
+1. Next, on the main page, find the freeDB you created and click on it navigate to the database details page.
+
+    ![A picture of clicking the freeDB SQL Databases](./media/ch2/deploy2b.png)
+
+1. On the SQL Database overview page, **Getting Started** tab for the database details. Here click on the blue **Open in Visual Studio Code** button.
 
     ![A picture of clicking on the blue Open in Visual Studio Code button](./media/ch2/deploy3a.png)
 
