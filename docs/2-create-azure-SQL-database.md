@@ -102,7 +102,7 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of clicking the Create button in the lower left](./media/ch2/deploy1p.png)
 
-1. The following page will detail the deployments progress.
+1. The following page will detail the deployments progress. *(Deployment takes a minute or 2)*
 
     ![A picture of the database deployment progress page](./media/ch2/deploy1q.png)
 
