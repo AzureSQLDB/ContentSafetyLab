@@ -42,7 +42,7 @@ In this section, you will test the External REST Endpoint Invocation (EREI) feat
 
     ![A picture of clicking the Run button](./media/ch3/testing1.png)
 
-1. Hover over the results to see the response message. It should look similar to the following.
+1. Click (or hover over in the Azure Portal Query Editor) the results to see the response message. It should look similar to the following.
 
       ```JSON
       {
