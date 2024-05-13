@@ -23,12 +23,6 @@ Azure OpenAI Service is powered by a diverse set of models with different capabi
 
 **Table 1:** Azure OpenAI Models
 
-TODO
-
-* Update messages/input with Adventure Works data
-* Add response sections and explore outputs
-
-
 ## Azure OpenAI Embeddings
 
 An embedding is a special format of data representation that machine learning models and algorithms can easily use. The embedding is an information dense representation of the semantic meaning of a piece of text. Each embedding is a vector of floating-point numbers, such that the distance between two embeddings in the vector space is correlated with semantic similarity between two inputs in the original format. For example, if two texts are similar, then their vector representations should also be similar.
