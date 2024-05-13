@@ -377,4 +377,11 @@ ELSE
 GO
 ```
 
+Try it out!
+
+```SQL
+exec aiContentSafety N'detectProtectedMaterial', N'SAFETY_KEY', N'A seasoned witch could call you From the depths of your disgrace And rearrange your liver To the solid mental grace And achieve it all with music That came quickly from afar Then taste the fruit of man Recorded losing all against the hour And assessing points to nowhere Leading every single one A dewdrop can exalt us Like the music of the sun And take away the plain In which we move and choose the course youre running'
+```
+Remember to replace SAFETY_KEY with your content safety key!
+
 </details>

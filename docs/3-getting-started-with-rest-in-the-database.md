@@ -18,7 +18,7 @@ External REST Endpoint Invocation can be called in an Azure SQL Database using t
 
 In this section, you will test the External REST Endpoint Invocation (EREI) feature of the database to ensure you have connectivity to other Azure services by calling an Azure Function. 
 
-**Important!** The response message will also contain the keys to be used for authentication in the next two chapters. Be sure to copy them and keep them where you can refer to them later in the workshop.
+**Important!** The response message will also contain the keys to be used for authentication in the following chapters. Be sure to copy them and keep them where you can refer to them later in the workshop.
 
 ### Using T-SQL to check connectivity to Azure Services
 

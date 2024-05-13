@@ -172,6 +172,8 @@ Visual Studio Code will be used for working with the database.
 
     Enter the **server name** of your Free Azure SQL Database instance. You can find and copy this value on the Azure SQL Database details page back in the Azure Portal.
 
+    *You may have to click the X in the upper right corner of the Start working with VS Code Page to return to the SQL Overview page.*
+
     ![A picture of a dialog box will appearing asking for a Server Name or ADO.NET connection string](./media/ch2/deploy3b5.png)
 
     then press enter/return in the dialog box.

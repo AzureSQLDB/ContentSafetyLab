@@ -277,7 +277,7 @@ This prebuilt summarization API can produce a summary for a conversation or from
             "headers": {
                 "Date": "Fri, 03 May 2024 20:31:10 GMT",
                 "Content-Length": "0",
-                "operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01",
+                "operation-location": "https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs/1111-2222-4444-111?api-version=2023-04-01",
                 "x-envoy-upstream-service-time": "238",
                 "apim-request-id": "abababab-abab-1234-1122-abababababab",
                 "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
@@ -288,17 +288,12 @@ This prebuilt summarization API can produce a summary for a conversation or from
     }
     ```
 
-1. Copy the value in the URL between **jobs\/** and **?api-version=2023-04-01** and use it in the following request. For example, in this string 
-
-    ``` JSON
-    "operation-location": "https:\/\/languagebuild2024.cognitiveservices.azure.com\/language\/analyze-text\/jobs\/1111-2222-4444-111?api-version=2023-04-01"
-    ```
-    you would take **1111-2222-4444-111**.
+1. Copy the URL in the **operation-location** value.
 
 1. Copy and paste the following code into the query editor.
 
     ```SQL
-    declare @url nvarchar(4000) = N'https://languagebuild2024.cognitiveservices.azure.com/language/analyze-text/jobs/OPERATION-LOCATION-ID?api-version=2023-04-01';
+    declare @url nvarchar(4000) = N'OPERATION-LOCATION-URL';
     declare @headers nvarchar(300) = N'{"Ocp-Apim-Subscription-Key":"LANGUAGE_KEY"}';
     declare @ret int, @response nvarchar(max);
 
@@ -312,7 +307,7 @@ This prebuilt summarization API can produce a summary for a conversation or from
     select @ret as ReturnCode, @response as Response;
     ```
 
-1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity. Replace the **OPERATION-LOCATION-ID** with the **operation-location** value from the response message.
+1. Replace the **LANGUAGE_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity. Replace the **OPERATION-LOCATION-URL** with the **operation-location** URL value from the response message.
 
 1. Execute the SQL statement with the run button.
 
