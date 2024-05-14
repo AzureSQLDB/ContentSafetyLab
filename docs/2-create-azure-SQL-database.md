@@ -158,9 +158,13 @@ Visual Studio Code will be used for working with the database.
 
     ![A picture of downloading or launching Visual Studio Code from the Azure portal](./media/ch2/deploy3b.png)
 
+1. After clicking **Launch it now**, the browser will have a modal window saying "This site is trying to open Visual Studio Code". Click the **Open** button.
+
+    ![A picture of click the Open button in the browser dialog box](./media/ch2/deploy3b1.png)
+
 1. When Visual Studio Code opens, click the SQL Extension on the left side.
 
-    ![A picture of click the Open button in Visual Studio Code connection dialog box](./media/ch2/deploy3b2.png)
+    ![A picture of clicking the SQL Server vs code extension on the left side](./media/ch2/deploy3b2.png)
 
 1. Next, click **Add Connection** in the SQL Extension.
 
@@ -172,7 +176,7 @@ Visual Studio Code will be used for working with the database.
 
     Enter the **server name** of your Free Azure SQL Database instance. You can find and copy this value on the Azure SQL Database details page back in the Azure Portal.
 
-    *You may have to click the X in the upper right corner of the Start working with VS Code Page to return to the SQL Overview page.*
+    *You may have to click the X in the upper right corner of the "Start Modern Data Workflow in Visual Studio Code" Page to return to the SQL Overview page.*
 
     ![A picture of a dialog box will appearing asking for a Server Name or ADO.NET connection string](./media/ch2/deploy3b5.png)
 
