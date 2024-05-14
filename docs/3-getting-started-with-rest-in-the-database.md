@@ -64,7 +64,7 @@ In this section, you will test the External REST Endpoint Invocation (EREI) feat
                   "Server": "Kestrel"
               }
           },
-          "result": "Hello from Microsoft Build 2024! The AI Language Key is XXXXXXXXX. The Content Safety Key is XXXXXXXXX"
+          "result": "Hello from Microsoft Build 2024! The AI Language Key is XXXXXXXXX. The Content Safety Key is XXXXXXXXX. The OpenAI Key is XXXXXXXXX."
       }
       ```
 
