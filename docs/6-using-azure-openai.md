@@ -137,3 +137,66 @@ The image generation API creates an image from a text prompt.
 1. Now, you are in charge. Either select a new product description ID or try creating an image yourself! Here is some inspiration:
 
     ![An image created by Azure OpenAI DALL-E 3](./media/ch6/image2.png)
+
+## Azure OpenAI GPT-4o
+
+Let's use the new GPT-4o model for this next call. We are going to ask it to describe a picture you make using the above DALL-E 3 endpoint. So to start, go wild and ask it to create you some fantastical image. Once you have that URL, we are going to use it in our REST call.
+
+1. Copy the following SQL and paste it into the SQL query editor. 
+
+    ```SQL
+    declare @url nvarchar(4000) = N'https://build2024openai.openai.azure.com/openai/models/2024-05-13/chat/completions?api-version=2024-05-13-preview';
+    declare @headers nvarchar(102) = N'{"api-key":"OPENAI_KEY"}';
+    declare @payload nvarchar(max) = N'{
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are an AI assistant that helps people find information."
+            },
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": "what is this an image of?"
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": "DALLE3_IMAGE_URL"
+                        }
+                    }
+                ]
+            }
+        ]
+    }';
+    declare @ret int, @response nvarchar(max);
+    exec @ret = sp_invoke_external_rest_endpoint
+    @url = @url,
+    @method = 'POST',
+    @headers = @headers,
+    @payload = @payload,
+    @timeout = 230,
+    @response = @response output;
+    select @ret as ReturnCode, @response as Response;
+    ```
+1. Replace the **OPENAI_KEY** text with the AI Language Key that was returned to you in the previous chapter when testing connectivity if not already filled in for you. Also, replace the **DALLE3_IMAGE_URL** with the url of the fantastical image you just created.
+
+1. Execute the SQL statement with the run button.
+
+1. View the return message and see if the new GPT-4o model was able to describe it.
+
+    ```JSON
+    "result": {
+        "id": "chatcmpl-10011000",
+        "object": "chat.completion",
+        "created": 1715809421,
+        "model": "gpt-4o preview",
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": "This image is a surreal digital artwork that shows a fun and imaginative concoction. It depicts a large insect, resembling a cicada, positioned on a pancake that appears to be floating over a grassy landscape, against a bright blue sky with scattered clouds. The way it's presented makes it look like it's flying above the landscape, creating a whimsical and surreal effect."
+                },
+    ```
