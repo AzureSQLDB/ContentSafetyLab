@@ -128,10 +128,6 @@ The next section of the workshop you will be creating and connecting to an Azure
 
     ![A picture of clicking the button labeled "Add your client IPv4 address (X.X.X.X)" to add your local IP address for database access](./media/ch2/deploy1v.png)
 
-1. Click the **checkbox** for **Allow Azure services and resources to access this server** in the **Exceptions** section.
-
-    ![A picture of clicking the checkbox for Allow Azure services and resources to access this server in the Exceptions section](./media/ch2/deploy1w.png)
-
 1. Finally, click the **Save** button in the lower left of the page.
 
     ![A picture of clicking the save button in the lower left of the page](./media/ch2/deploy1x.png)
