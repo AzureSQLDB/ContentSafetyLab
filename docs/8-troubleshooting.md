@@ -4,7 +4,7 @@
 
 ## No network connectivity
 
-When logging into the VM, you may see that there is no networking available by the followinf icon on the lower right of the Windows OS.
+When logging into the VM, you may see that there is no networking available by the following icon on the lower right of the Windows OS.
 
 ![A picture of the no network icon in windows](./media/ch8/trouble1.png)
 
