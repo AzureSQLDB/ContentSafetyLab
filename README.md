@@ -4,4 +4,6 @@ Learn how to invoke external REST endpoints from other Azure services without ha
 
 Start the workshop [here](./docs/1-about-the-workshop.md).
 
+Deck with resources can be found [here](https://github.com/AzureSQLDB/ContentSafetyLab/blob/main/Azure%20SQL%20DB%20and%20REST%20endpoints%20Lab.pdf)
+
 ![A picture of a 3.5 in floppy disk with the build logo](./docs/media/MSBuild_GoldenFloppy.gif)
