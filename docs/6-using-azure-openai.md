@@ -13,7 +13,7 @@ Azure OpenAI Service is powered by a diverse set of models with different capabi
 
 |Models	|Description|
 --------|-----------|
-|GPT-4 Turbo | The latest most capable Azure OpenAI models with multimodal versions which can accept both text and images as input.|
+|GPT-4o & GPT-4 Turbo [NEW!]| The latest most capable Azure OpenAI models with multimodal versions, which can accept both text and images as input.|
 |GPT-4 | A set of models that improve on GPT-3.5 and can understand and generate natural language and code.|
 |GPT-3.5 | A set of models that improve on GPT-3 and can understand and generate natural language and code.|
 |Embeddings	| A set of models that can convert text into numerical vector form to facilitate text similarity.|
